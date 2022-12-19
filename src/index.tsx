@@ -3,13 +3,12 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import router from "./Router";
-import { theme } from "./theme";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { theme } from "./theme";
+import { RecoilRoot } from "recoil";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-const GloablStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 html,
 body,
 div,
@@ -114,6 +113,7 @@ section {
 }
 body {
   line-height: 1;
+  background-color: ${(props) => props.theme.bgColor};
 }
 ol,
 ul {
@@ -141,14 +141,26 @@ a {
 * {
   box-sizing: border-box;
 }`;
+const queryClient = new QueryClient();
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
 root.render(
   <React.StrictMode>
-    <GloablStyle />
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
   </React.StrictMode>
 );
+
+// recoil > react-query > theme > {reset.css / router}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
