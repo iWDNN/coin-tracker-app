@@ -1,46 +1,24 @@
-# Getting Started with Create React App
+# coin-tracker-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-
 
-## Available Scripts
+- Libaries
 
-In the project directory, you can run:
+  - framer-motion
+  - styled-components
+  - react-router-dom # 6.4~
 
-### `npm start`
+    - createBrowserRouter
+    - Link : 특정 조건 없이 클릭해서 보내는 링크
+    - useNavigate : 유저가 로그인하여 리다이렉트해야 할 경우는, 어떤 페이지에 접근햇는데 권한이 없어서 이동시킬 때
+    - useParams : 주소 파라미터 값 가져오는 훅
+    - outlet: 스크린 하나당 자식을 보여줄 경우
+    - useOutletContext : outlet으로 보낸 데이터
+    - url을 통해서 작업을 하는 이유 : 새로고침 했을 경우 유저가 그자리에서 시작될수 있게 만들어 주는 편의성
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- api link
+  - 코인전체 : https://api.coinpaprika.com/v1/coins
+  - 코인아이콘 : https://cryptoicon-api.vercel.app/api/icon/{코인심볼} api server down
+  - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.id}.png
+  - 코인정보 : https://api.coinpaprika.com/v1/coins/{코인이름}
+  - 코인가격 : https://api.coinpaprika.com/v1/tickers/{코인이름}
