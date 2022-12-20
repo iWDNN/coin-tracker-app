@@ -18,7 +18,7 @@ const Light = styled.div<{ color: string; size: string }>`
     0 0 8px ${(props) => props.color}; ;
 `;
 
-export default function Signal({ color = "#eee", size = 5 }: ISignal) {
+export default function Signal({ color, size = 5 }: ISignal) {
   return (
     <SignalCt>
       <Light color={color} size={size + "px"} />

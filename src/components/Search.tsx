@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { ICrypto } from "../types";
 import Signal from "./Signal";
 
+interface ISearchProps {
+  small?: boolean;
+}
+
 const SearchCt = styled.form`
   position: relative;
   margin-left: 1em;
@@ -65,7 +69,7 @@ const SearchListItem = styled.li`
     font-weight: 500;
   }
 `;
-export default function Search() {
+export default function Search({ small = false }: ISearchProps) {
   //data
   const allCrypto: ICrypto[] = useOutletContext();
   const [searchList, setSearchList] = useState<ICrypto[]>([]);
@@ -96,7 +100,8 @@ export default function Search() {
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate(`results/${searchValue}/tabs/all`);
+    if (small) navigate(`/results/${searchValue}/tabs/all`);
+    else navigate(`results/${searchValue}/tabs/all`);
   };
   return (
     <SearchCt onSubmit={onSubmit}>

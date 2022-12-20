@@ -18,7 +18,7 @@ export default function Header() {
       <Link to="/">
         <i className="fa-solid fa-house" />
       </Link>
-      <Search />
+      <Search small />
     </Container>
   );
 }

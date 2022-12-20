@@ -3,7 +3,7 @@ export interface IPopUp {
   textList: string[];
 }
 export interface ISignal {
-  color?: string;
+  color: string;
   size?: number;
 }
 
