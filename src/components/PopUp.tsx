@@ -12,7 +12,7 @@ const Container = styled.div`
   ul {
     width: 300px;
     position: absolute;
-    left: 20px;
+    right: 20px;
     bottom: 25px;
     padding: 0.5em;
     line-height: 1.4;

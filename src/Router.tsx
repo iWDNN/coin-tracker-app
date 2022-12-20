@@ -13,15 +13,15 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/reclist",
+        path: "/rec-list",
         element: <RecList />,
       },
       {
-        path: "results",
+        path: "results/:searchId",
         element: <Results />,
       },
       {
-        path: "Crypto",
+        path: "crypto",
         element: <Crypto />,
       },
     ],

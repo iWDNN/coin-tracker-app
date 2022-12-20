@@ -13,5 +13,5 @@ export interface ICrypto {
   is_new: boolean;
   name: string;
   symbol: string;
-  type: string;
+  type: "token" | "coin";
 }

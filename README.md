@@ -24,8 +24,8 @@
   - 코인전체 : https://api.coinpaprika.com/v1/coins
   - ~~코인아이콘 : https://cryptoicon-api.vercel.app/api/icon/{코인심볼} api server down~~
   - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.symbol.toLowerCase()}.png
-  - 코인정보 : https://api.coinpaprika.com/v1/coins/{코인이름}
-  - 코인가격 : https://api.coinpaprika.com/v1/tickers/{코인이름}
+  - 코인정보 : https://api.coinpaprika.com/v1/coins/{coinId}
+  - 코인가격 : https://api.coinpaprika.com/v1/tickers/{coinId}
 
 - 루트 스크린
 
