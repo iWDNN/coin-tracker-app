@@ -5,12 +5,26 @@ import styled from "styled-components";
 const Container = styled.div`
   position: absolute;
   top: 0;
+  width: 100%;
+  background-color: orange;
+  ul {
+    display: flex;
+    li {
+      padding: 5px;
+    }
+  }
 `;
 export default function Header() {
   return (
     <Container>
-      <Link to={`/`}>home</Link>
-      <Link to={`/about`}>about</Link>
+      <ul>
+        <li>
+          <Link to={`/`}>home</Link>
+        </li>
+        <li>
+          <Link to={`/reclist`}>list</Link>
+        </li>
+      </ul>
     </Container>
   );
 }

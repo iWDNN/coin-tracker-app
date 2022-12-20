@@ -1,2 +1,4 @@
 export { default as Home } from "./Home";
-export { default as About } from "./About";
+export { default as RecList } from "./RecList";
+export { default as Results } from "./Results";
+export { default as Crypto } from "./Crypto";

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
+import { Signal } from "../components";
+import PopUp from "../components/PopUp";
+import { popUpData } from "../data";
 import { ICrypto } from "../types";
 
 const Container = styled.div`
@@ -11,6 +14,17 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  h1 {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    i {
+      font-weight: 0.8em;
+      margin-left: 5px;
+    }
+  }
 `;
 
 const SearchCt = styled.div`
@@ -29,39 +43,68 @@ const SearchBar = styled.input`
 `;
 const SearchList = styled.ul`
   position: absolute;
-  width: 100%;
+  width: 30vw;
   height: 174px;
   border-radius: 10px;
   overflow: scroll;
-  li {
-    padding: 0.5em;
-    font-size: 0.9em;
-    background-color: #fff;
-    &:hover {
-      border: 1px solid black;
-    }
+`;
+
+const SearchListItem = styled.li`
+  padding: 0.5em;
+  font-size: 0.9em;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 5% 5% 80% 10%;
+  &:hover {
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+  div:first-child {
+    place-self: center;
+  }
+  img {
+    width: 20px;
+    height: 20px;
+    place-self: center;
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+  }
+  h3 {
+    color: #9a9a9a;
+    letter-spacing: 1px;
+    font-size: 0.5em;
+    font-weight: 500;
   }
 `;
 
 export default function Home() {
+  //status
+  const [listTg, setListTg] = useState(false);
+  //data
   const [searchList, setSearchList] = useState<ICrypto[]>([]);
-  const { isLoading, data } = useQuery<ICrypto[]>("allCoins", () =>
+  const { isLoading, data: allCrypto } = useQuery<ICrypto[]>("allCrypto", () =>
     fetchCoins()
   );
+  const onToggle = () => {
+    setListTg((prev) => !prev);
+  };
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSearchList([]);
     const {
       currentTarget: { value },
     } = event;
     if (value.length >= 3) {
-      data?.filter(
+      allCrypto?.filter(
         (crypto) =>
           crypto.name.toLowerCase().slice(0, value.length) ===
             value.toLowerCase() && setSearchList((prev) => [...prev, crypto])
       );
     }
-    console.log(searchList);
   };
+  // console.log(allCrypto);
   return (
     <>
       <Container>
@@ -69,13 +112,34 @@ export default function Home() {
           <span>Loading</span>
         ) : (
           <>
-            <span>Coins</span>
+            <h1>
+              Cryptos
+              <PopUp {...popUpData} />
+            </h1>
             <SearchCt>
-              <SearchBar onChange={onChange} />
+              <SearchBar
+                onFocus={onToggle}
+                onBlur={onToggle}
+                onChange={onChange}
+              />
               <SearchList>
-                {searchList.map((crypto) => (
-                  <li key={crypto.id}>{crypto.name}</li>
-                ))}
+                {listTg
+                  ? searchList.map((crypto) => (
+                      <SearchListItem key={crypto.id}>
+                        <div>
+                          {crypto.is_new ? (
+                            <Signal color={"#fce700"} size={5} />
+                          ) : null}
+                        </div>
+                        <img
+                          src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
+                          alt={crypto.name}
+                        />
+                        <h2>{crypto.name}</h2>
+                        <h3>{crypto.type}</h3>
+                      </SearchListItem>
+                    ))
+                  : null}
               </SearchList>
             </SearchCt>
           </>

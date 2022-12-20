@@ -23,11 +23,26 @@
 
   - 코인전체 : https://api.coinpaprika.com/v1/coins
   - ~~코인아이콘 : https://cryptoicon-api.vercel.app/api/icon/{코인심볼} api server down~~
-  - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.id}.png
+  - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.symbol.toLowerCase()}.png
   - 코인정보 : https://api.coinpaprika.com/v1/coins/{코인이름}
   - 코인가격 : https://api.coinpaprika.com/v1/tickers/{코인이름}
 
-- 메인 검색창
-  - 메인창에서 react-query로 데이터 받아오기.
-  - 받아온 데이터로. 검색 regExp로 해야할듯 3글자 이상부터 검색..?
-  - 오? 메인창이 애초에 검색바라 상관없겠네 ?
+- 루트 스크린
+
+  - 네비게이션 바
+
+    - 홈 라우터
+    - 크립토 라우터
+      - 베스트 크립토
+      - 변동폭?
+      - 거래량?
+
+  - 홈 스크린
+
+    - 검색창
+      - 메인창에서 react-query로 데이터 받아오기. (캐시 저장)
+      - 받아온 데이터로. 검색 regExp로 해야할듯 3글자 이상부터 검색..?
+
+  - 검색 결과 스크린
+
+  - 크립토 스크린

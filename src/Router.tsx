@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
-import { Home, About } from "./screens";
+import { Home, Crypto, Results, RecList } from "./screens";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +13,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "about",
-        element: <About />,
+        path: "/reclist",
+        element: <RecList />,
+      },
+      {
+        path: "results",
+        element: <Results />,
+      },
+      {
+        path: "Crypto",
+        element: <Crypto />,
       },
     ],
   },
