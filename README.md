@@ -8,9 +8,6 @@
   - react-router-dom # 6.4~
   - framer-motion
   - react-hook-form
-  - react-query
-  - recoil
-
     - createBrowserRouter
     - Link : 특정 조건 없이 클릭해서 보내는 링크
     - useNavigate : 유저가 로그인하여 리다이렉트해야 할 경우는, 어떤 페이지에 접근햇는데 권한이 없어서 이동시킬 때
@@ -18,6 +15,9 @@
     - outlet: 스크린 하나당 자식을 보여줄 경우
     - useOutletContext : outlet으로 보낸 데이터
     - url을 통해서 작업을 하는 이유 : 새로고침 했을 경우 유저가 그자리에서 시작될수 있게 만들어 주는 편의성
+  - react-query
+  - recoil
+  - react-uuid
 
 - api link
 

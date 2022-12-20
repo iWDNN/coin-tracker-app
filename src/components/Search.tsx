@@ -57,6 +57,8 @@ const SearchListItem = styled.li`
     padding-left: 10px;
   }
   h3 {
+    display: flex;
+    align-items: center;
     color: #9a9a9a;
     letter-spacing: 1px;
     font-size: 0.5em;
@@ -69,18 +71,18 @@ export default function Search() {
   const [searchList, setSearchList] = useState<ICrypto[]>([]);
   //status
   const navigate = useNavigate();
-  const [value, setValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [listTg, setListTg] = useState(false);
   const onToggle = () => {
     setListTg((prev) => !prev);
   };
   //form
   const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setSearchList([]);
-    setValue(event.currentTarget.value);
     const {
       currentTarget: { value },
     } = event;
+    setSearchList([]);
+    setSearchValue(event.currentTarget.value);
     if (value.length >= 3) {
       setSearchList(
         allCrypto?.filter(
@@ -90,10 +92,11 @@ export default function Search() {
         )
       );
     }
+    // console.log(searchList); 알수없는 서치리스트 버그 한번씩 출력이 안되서 콘솔출력 한번해주니까 작동되고 그럼 너무 무거워서 그런가
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    navigate(`results/${value}`);
+    navigate(`results/${searchValue}/tabs/all`);
   };
   return (
     <SearchCt onSubmit={onSubmit}>
@@ -107,9 +110,7 @@ export default function Search() {
         {listTg
           ? searchList.map((crypto) => (
               <SearchListItem key={crypto.id}>
-                <div>
-                  {crypto.is_new ? <Signal color={"#fce700"} size={5} /> : null}
-                </div>
+                <div>{crypto.is_new ? <Signal color={"#fce700"} /> : null}</div>
                 <img
                   src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
                   alt={crypto.name}

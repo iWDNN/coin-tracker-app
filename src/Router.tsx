@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
-import { Home, Crypto, Results, RecList } from "./screens";
+import { Home, Results, RecList, Cryptos, CryptoInfo } from "./screens";
 
 const router = createBrowserRouter([
   {
@@ -19,10 +19,16 @@ const router = createBrowserRouter([
       {
         path: "results/:searchId",
         element: <Results />,
+        children: [
+          {
+            path: "tabs/:tabId",
+            element: <Cryptos />,
+          },
+        ],
       },
       {
-        path: "crypto",
-        element: <Crypto />,
+        path: "crypto-info",
+        element: <CryptoInfo />,
       },
     ],
   },

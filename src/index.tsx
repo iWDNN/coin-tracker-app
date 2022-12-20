@@ -114,6 +114,7 @@ section {
 body {
   line-height: 1;
   background-color: ${(props) => props.theme.bgColor};
+  font-family: 'Noto Sans KR', sans-serif;
 }
 ol,
 ul {
@@ -148,16 +149,16 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  // <React.StrictMode>
-  <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </RecoilRoot>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
+  </React.StrictMode>
 );
 
 // recoil > react-query > theme > {reset.css / router}

@@ -1,5 +1,6 @@
 import React from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
+import uuid from "react-uuid";
 import styled from "styled-components";
 import { Header } from "../components";
 import { ICrypto } from "../types";
@@ -15,18 +16,29 @@ const Container = styled.div`
     }
   }
 `;
-
+const MiniCt = styled.div`
+  display: grid;
+  grid-template-columns: 15% 85%;
+`;
 const Tabs = styled.ul`
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 const Tab = styled.li`
   width: 100px;
-  padding: 2px 5px;
-  border: 1px solid black;
+  padding: 4px 10px;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  font-weight: 500;
+  letter-spacing: 1px;
+  span {
+    font-size: 0.8em;
+  }
 `;
 
 export default function Results() {
-  const CryptoTypes: string[] = ["All", "coin", "token"];
+  const cryptoTypes: string[] = ["all", "coin", "token"];
   const { searchId } = useParams();
   const allCrypto: ICrypto[] = useOutletContext();
   const searchResult: ICrypto[] = allCrypto.filter(
@@ -37,19 +49,26 @@ export default function Results() {
   return (
     <Container>
       <Header />
-      <Tabs>
-        {CryptoTypes.map((type) => (
-          <Tab key={type}>{type}</Tab>
-        ))}
-      </Tabs>
-      <ul>
-        {searchResult.map((crypto) => (
-          <li key={crypto.id}>
-            <span>{crypto.name}</span>
-            <span>{crypto.type}</span>
-          </li>
-        ))}
-      </ul>
+      <MiniCt>
+        <Tabs>
+          {cryptoTypes.map((type) => (
+            <Link key={uuid()} to={`tabs/${type}`}>
+              <Tab>
+                {type}{" "}
+                <span>
+                  (
+                  {type === "all"
+                    ? searchResult.length
+                    : searchResult.filter((crypto) => crypto.type === type)
+                        .length}
+                  )
+                </span>
+              </Tab>
+            </Link>
+          ))}
+        </Tabs>
+        <Outlet context={searchResult} />
+      </MiniCt>
     </Container>
   );
 }

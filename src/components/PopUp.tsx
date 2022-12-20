@@ -8,6 +8,9 @@ const Container = styled.div`
   i {
     width: 20px;
     height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   ul {
     width: 300px;

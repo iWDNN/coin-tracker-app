@@ -8,16 +8,7 @@ export default function Root() {
   const { isLoading, data: allCrypto } = useQuery<ICrypto[]>("allCrypto", () =>
     fetchCoins()
   );
-
   return (
-    <>
-      {isLoading ? (
-        <span>Loading</span>
-      ) : (
-        <>
-          <Outlet context={allCrypto} />
-        </>
-      )}
-    </>
+    <>{isLoading ? <span>Loading</span> : <Outlet context={allCrypto} />}</>
   );
 }
