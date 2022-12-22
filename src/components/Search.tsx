@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import styled from "styled-components";
-import { ICrypto } from "../types";
+import { ICrypto } from "../types/crypto";
 import Signal from "./Signal";
 
 interface ISearchProps {
@@ -96,7 +96,8 @@ export default function Search({ small = false }: ISearchProps) {
         )
       );
     }
-    // console.log(searchList); 알수없는 서치리스트 버그 한번씩 출력이 안되서 콘솔출력 한번해주니까 작동되고 그럼 너무 무거워서 그런가
+    // console.log(searchList);
+    //알수없는 서치리스트 버그 한번씩 출력이 안되서 콘솔출력 한번해주니까 작동되고 그럼 너무 무거워서 그런가
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -108,21 +109,25 @@ export default function Search({ small = false }: ISearchProps) {
       <i className="fa-solid fa-search" />
       <SearchBar
         onFocus={onToggle}
-        onBlur={onToggle}
+        // onBlur={onToggle}
         onChange={onChange}
       ></SearchBar>
       <SearchList>
         {listTg
           ? searchList.map((crypto) => (
-              <SearchListItem key={crypto.id}>
-                <div>{crypto.is_new ? <Signal color={"#fce700"} /> : null}</div>
-                <img
-                  src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
-                  alt={crypto.name}
-                />
-                <h2>{crypto.name}</h2>
-                <h3>{crypto.type}</h3>
-              </SearchListItem>
+              <Link key={crypto.id} to={`/crypto-info/${crypto.id}`}>
+                <SearchListItem>
+                  <div>
+                    {crypto.is_new ? <Signal color={"#fce700"} /> : null}
+                  </div>
+                  <img
+                    src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
+                    alt={crypto.name}
+                  />
+                  <h2>{crypto.name}</h2>
+                  <h3>{crypto.type}</h3>
+                </SearchListItem>
+              </Link>
             ))
           : null}
       </SearchList>

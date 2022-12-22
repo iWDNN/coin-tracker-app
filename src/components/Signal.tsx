@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ISignal } from "../types";
+import { ISignal } from "../types/common";
 
 const SignalCt = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import React from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Signal } from "../components";
-import { ICrypto } from "../types";
+import { Signal } from ".";
+import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
   width: 100%;
@@ -63,25 +63,27 @@ export default function Cryptos() {
     <Container>
       <ResultList>
         {result.map((crypto) => (
-          <ResultItem key={crypto.id}>
-            <Signal color={crypto.is_new ? "#fce700" : "transparent"} />
-            <div>
-              <img
-                src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
-                alt={crypto.name}
-              />
-            </div>
-            <div>
-              <span>{crypto.symbol}</span>
-            </div>
-            <div>
-              <span>{crypto.name}</span>
-            </div>
-            <div>
-              <span>{crypto.type}</span>
-            </div>
-            <Signal color={crypto.is_active ? "#82CD47" : "#FF4A4A"} />
-          </ResultItem>
+          <Link key={crypto.id} to={`/crypto-info/${crypto.id}`}>
+            <ResultItem>
+              <Signal color={crypto.is_new ? "#fce700" : "transparent"} />
+              <div>
+                <img
+                  src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
+                  alt={crypto.name}
+                />
+              </div>
+              <div>
+                <span>{crypto.symbol}</span>
+              </div>
+              <div>
+                <span>{crypto.name}</span>
+              </div>
+              <div>
+                <span>{crypto.type}</span>
+              </div>
+              <Signal color={crypto.is_active ? "#82CD47" : "#FF4A4A"} />
+            </ResultItem>
+          </Link>
         ))}
       </ResultList>
     </Container>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { IPopUp } from "../types";
+import { IPopUp } from "../types/common";
 
 const Container = styled.div`
   position: relative;
@@ -30,7 +30,10 @@ const Container = styled.div`
   }
 `;
 
-export default function PopUp({ iconTag, textList }: IPopUp) {
+export default function PopUp({
+  iconTag = "fa-regular fa-circle-question",
+  text = "",
+}: IPopUp) {
   const [toggle, setToggle] = useState(false);
   const mouseToggle = () => {
     setToggle((prev) => !prev);
@@ -42,13 +45,7 @@ export default function PopUp({ iconTag, textList }: IPopUp) {
         onMouseOver={mouseToggle}
         onMouseOut={mouseToggle}
       />
-      {toggle ? (
-        <ul>
-          {textList.map((text) => (
-            <li key={text}>{text}</li>
-          ))}
-        </ul>
-      ) : null}
+      {toggle ? <ul>{text}</ul> : null}
     </Container>
   );
 }

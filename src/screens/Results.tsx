@@ -3,7 +3,7 @@ import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
 import { Header } from "../components";
-import { ICrypto } from "../types";
+import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
   width: 100vw;
