@@ -5,14 +5,16 @@ import { Signal } from ".";
 import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
-  width: 100%;
+  flex-grow: 1;
 `;
 
 const ResultList = styled.ul`
   border-radius: 10px;
-  border-right: 6px solid #fff;
 `;
 const ResultItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #e7e7e7;
   padding: 10px 15px;
   font-size: 0.9em;

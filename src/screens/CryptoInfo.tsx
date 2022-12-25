@@ -18,7 +18,7 @@ const Container = styled.div`
 const CryptoCt = styled.div`
   margin: 2em;
   padding: 1.5em;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid #e5e5e5;
   border-radius: 15px;
   background-color: #eee;
   h1 {

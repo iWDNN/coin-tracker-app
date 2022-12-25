@@ -10,24 +10,36 @@ interface ISearchProps {
 
 const SearchCt = styled.form`
   position: relative;
+  /* display: flex;
+  align-items: center; */
   margin-left: 1em;
   border-radius: 10px;
+`;
+const SearchBarCt = styled.div<{ small: boolean }>`
+  position: relative;
+  display: flex;
+  align-content: center;
+  height: 100%;
   i {
     position: absolute;
-    padding: 0.5em;
-    font-size: 0.9em;
+    top: 50%;
+    transform: translateY(-50%);
+    left: ${(props) => (props.small ? "0.5em" : "1em")};
+    font-size: ${(props) => (props.small ? "0.9em" : "1.1em")};
   }
 `;
 
-const SearchBar = styled.input`
-  width: 30vw;
-  padding: 0.5em 1em;
-  padding-left: 2.3em;
-  border-radius: 10px;
+const SearchBar = styled.input<{ small: boolean }>`
+  width: ${(props) => (props.small ? "30vw" : "33vw")};
+  padding: ${(props) => (props.small ? "0.5em 1em" : "0.8em 2em")};
+  padding-left: ${(props) => (props.small ? "2.3em" : "2.7em")};
+  font-size: ${(props) => (props.small ? "1em" : "1.1em")};
+  border-radius: 15px;
   border: none;
   outline: 1px solid #eee;
 `;
 const SearchList = styled.ul`
+  width: 100%;
   position: absolute;
   height: 174px;
   border-radius: 10px;
@@ -35,7 +47,7 @@ const SearchList = styled.ul`
 `;
 
 const SearchListItem = styled.li`
-  width: 30vw;
+  width: 100%;
   padding: 0.5em;
   font-size: 0.9em;
   background-color: #fff;
@@ -101,18 +113,20 @@ export default function Search({ small = false }: ISearchProps) {
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (small) navigate(`/results/${searchValue}/tabs/all`);
-    else navigate(`results/${searchValue}/tabs/all`);
+    navigate(`/results/${searchValue}/tabs/all`);
+    setListTg(false);
   };
   return (
     <SearchCt onSubmit={onSubmit}>
-      <i className="fa-solid fa-search" />
-      <SearchBar
-        onFocus={onToggle}
-        // onBlur={onToggle}
-        onChange={onChange}
-      ></SearchBar>
+      <SearchBarCt small={small}>
+        <i className="fa-solid fa-search" />
+        <SearchBar
+          small={small}
+          onFocus={() => setListTg(true)}
+          onBlur={() => setListTg(false)}
+          onChange={onChange}
+        />
+      </SearchBarCt>
       <SearchList>
         {listTg
           ? searchList.map((crypto) => (

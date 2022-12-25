@@ -2,23 +2,21 @@ import React from "react";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
-import { Header } from "../components";
+import { Search } from "../components";
 import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
-  width: 100vw;
-  margin-top: 5vh;
-  ul {
-    li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
+  flex-grow: 1;
+`;
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
 `;
 const MiniCt = styled.div`
-  display: grid;
-  grid-template-columns: 15% 85%;
+  display: flex;
 `;
 const Tabs = styled.ul`
   display: flex;
@@ -26,6 +24,9 @@ const Tabs = styled.ul`
   align-items: center;
 `;
 const Tab = styled.li<{ isActive: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 150px;
   padding: 10px 15px;
   margin-bottom: 5px;
@@ -50,7 +51,9 @@ export default function Results() {
   );
   return (
     <Container>
-      <Header />
+      <Header>
+        <Search small />
+      </Header>
       <MiniCt>
         <Tabs>
           {cryptoTypes.map((type) => (

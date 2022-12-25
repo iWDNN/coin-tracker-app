@@ -1,39 +1,37 @@
 import React from "react";
 import styled from "styled-components";
-import { PopUp, Search } from "../components";
-import { popUpData } from "../data";
+import { Search } from "../components";
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* flex-direction: column; */
+  margin: 0.5em;
 `;
 
 const Title = styled.div`
   display: flex;
   align-items: center;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  h2 {
-    margin: 5px;
-  }
-  i {
-    font-weight: 0.8em;
+  flex-direction: column;
+  margin-bottom: 4em;
+  h1 {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
   }
 `;
+
 export default function Home() {
   return (
     <>
       <Container>
         <Title>
-          <h2>Cryptos</h2>
-          <PopUp {...popUpData} />
+          <h1>Cryptos</h1>
+          <Search />
         </Title>
-        <Search />
       </Container>
     </>
   );

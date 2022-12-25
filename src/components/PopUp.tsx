@@ -12,7 +12,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
-  ul {
+  p {
     width: 300px;
     position: absolute;
     right: 20px;
@@ -23,10 +23,7 @@ const Container = styled.div`
     border-radius: 5px;
     background-color: white;
     opacity: 0.5;
-    li {
-      margin-bottom: 5px;
-      font-size: 0.7em;
-    }
+    font-size: 0.7em;
   }
 `;
 
@@ -45,7 +42,7 @@ export default function PopUp({
         onMouseOver={mouseToggle}
         onMouseOut={mouseToggle}
       />
-      {toggle ? <ul>{text}</ul> : null}
+      {toggle ? <p>{text}</p> : null}
     </Container>
   );
 }
