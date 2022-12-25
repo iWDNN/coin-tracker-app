@@ -18,6 +18,7 @@
   - react-query
   - recoil
   - react-uuid
+  - apex-chart
 
 - api link
 
@@ -26,6 +27,7 @@
   - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.symbol.toLowerCase()}.png
   - 코인정보 : https://api.coinpaprika.com/v1/coins/{coinId}
   - 코인가격 : https://api.coinpaprika.com/v1/tickers/{coinId}
+  - ohlcv임시 : https://ohlcv-api.nomadcoders.workers.dev/?coinId={coinId}
 
 - 루트 스크린
 

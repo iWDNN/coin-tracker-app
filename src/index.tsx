@@ -7,6 +7,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const GlobalStyle = createGlobalStyle`
 html,
@@ -149,16 +150,17 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  // <React.StrictMode>
-  <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </RecoilRoot>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={true} />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
+  </React.StrictMode>
 );
 
 // recoil > react-query > theme > {reset.css / router}

@@ -101,6 +101,7 @@ export default function Search({ small = false }: ISearchProps) {
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (small) navigate(`/results/${searchValue}/tabs/all`);
     else navigate(`results/${searchValue}/tabs/all`);
   };

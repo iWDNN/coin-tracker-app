@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 import { Loading, PopUp } from "../components";
+import Chart from "../components/Chart";
 import { ICryptoInfo, ICryptoPrice } from "../types/crypto";
 
 type RouteParams = {
@@ -20,14 +21,6 @@ const CryptoCt = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   background-color: #eee;
-`;
-const Top = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.2); */
-`;
-const Middle = styled.div`
   h1 {
     font-weight: 600;
     font-size: 1.4em;
@@ -35,24 +28,6 @@ const Middle = styled.div`
     margin-top: 1em;
     background-color: #000000;
     color: #ff8080;
-  }
-  ul {
-    margin: 10px;
-    li {
-      display: flex;
-      span {
-        padding: 4px;
-      }
-      span:first-child {
-        background-color: #000;
-        color: #fff;
-      }
-      span:last-child {
-        margin-right: 10px;
-        background-color: #fff;
-        color: #000;
-      }
-    }
   }
 `;
 const Title = styled.div`
@@ -74,6 +49,74 @@ const Title = styled.div`
       font-size: 0.9em;
       font-weight: 500;
       letter-spacing: 1.5px;
+    }
+  }
+`;
+const Overview = styled.ul`
+  display: flex;
+  justify-content: space-between;
+`;
+const OverviewItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 0 10px;
+  span:first-child {
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  span:last-child {
+    font-size: 0.8em;
+    font-weight: 400;
+  }
+`;
+const Top = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: rgba(0, 0, 0, 0.2); */
+`;
+const Middle = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  ul {
+    margin: 10px;
+    li {
+      display: flex;
+      span {
+        padding: 4px;
+      }
+      span:first-child {
+        background-color: #000;
+        color: #fff;
+      }
+      span:last-child {
+        margin-right: 10px;
+        background-color: #fff;
+        color: #000;
+      }
+    }
+  }
+`;
+const Bottom = styled.div`
+  ul {
+    margin: 10px;
+    li {
+      display: flex;
+      span {
+        padding: 4px;
+      }
+      span:first-child {
+        background-color: #000;
+        color: #fff;
+      }
+      span:last-child {
+        margin-right: 10px;
+        background-color: #fff;
+        color: #000;
+      }
     }
   }
 `;
@@ -107,8 +150,139 @@ export default function CryptoInfo() {
               </div>
               <PopUp text={infoData?.description} />
             </Title>
+            <Overview>
+              <OverviewItem>
+                <span>beta_value</span>
+                <span>{priceData?.beta_value} USD</span>
+              </OverviewItem>
+              <OverviewItem>
+                <span>price</span>
+                <span>{priceData?.quotes.USD.price.toFixed(2)} USD</span>
+              </OverviewItem>
+              <OverviewItem>
+                <span>circulating_supply</span>
+                <span>{priceData?.circulating_supply}</span>
+              </OverviewItem>
+              <OverviewItem>
+                <span>max_supply</span>
+                <span>{priceData?.max_supply}</span>
+              </OverviewItem>
+            </Overview>
           </Top>
           <Middle>
+            <section>
+              <h1>CryptoChart</h1>
+              <Chart coinId={coinId} />
+            </section>
+            <section>
+              <h1>CryptoPrice</h1>
+              <ul>
+                <li>
+                  <span>id</span>
+                  <span>{priceData?.id}</span>
+                </li>
+                <li>
+                  <span>rank</span>
+                  <span>{priceData?.rank}</span>
+                </li>
+                <li>
+                  <span>symbol</span>
+                  <span>{priceData?.symbol}</span>
+                </li>
+                <li>
+                  <span>beta_value</span>
+                  <span>{priceData?.beta_value}</span>
+                </li>
+                <li>
+                  <span>circulating_supply</span>
+                  <span>{priceData?.circulating_supply}</span>
+                </li>
+                <li>
+                  <span>first_data_at</span>
+                  <span>{priceData?.first_data_at}</span>
+                </li>
+                <li>
+                  <span>last_updated</span>
+                  <span>{priceData?.last_updated}</span>
+                </li>
+                <li>
+                  <span>max_supply</span>
+                  <span>{priceData?.max_supply}</span>
+                </li>
+                <li>
+                  <ul>
+                    <li>
+                      <span>ath_date</span>
+                      <span>{priceData?.quotes.USD.ath_date}</span>
+                    </li>
+                    <li>
+                      <span>ath_price</span>
+                      <span>{priceData?.quotes.USD.ath_price}</span>
+                    </li>
+                    <li>
+                      <span>market_cap</span>
+                      <span>{priceData?.quotes.USD.market_cap}</span>
+                    </li>
+                    <li>
+                      <span>market_cap_change_24h</span>
+                      <span>{priceData?.quotes.USD.market_cap_change_24h}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_15m</span>
+                      <span>{priceData?.quotes.USD.percent_change_15m}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_30m</span>
+                      <span>{priceData?.quotes.USD.percent_change_30m}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_1h</span>
+                      <span>{priceData?.quotes.USD.percent_change_1h}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_6h</span>
+                      <span>{priceData?.quotes.USD.percent_change_6h}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_12h</span>
+                      <span>{priceData?.quotes.USD.percent_change_12h}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_7d</span>
+                      <span>{priceData?.quotes.USD.percent_change_7d}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_30d</span>
+                      <span>{priceData?.quotes.USD.percent_change_30d}</span>
+                    </li>
+                    <li>
+                      <span>percent_change_1y</span>
+                      <span>{priceData?.quotes.USD.percent_change_1y}</span>
+                    </li>
+                    <li>
+                      <span>percent_from_price_ath</span>
+                      <span>
+                        {priceData?.quotes.USD.percent_from_price_ath}
+                      </span>
+                    </li>
+                    <li>
+                      <span>price</span>
+                      <span>{priceData?.quotes.USD.price}</span>
+                    </li>
+                    <li>
+                      <span>volume_24h</span>
+                      <span>{priceData?.quotes.USD.volume_24h}</span>
+                    </li>
+                    <li>
+                      <span>volume_24h_change_24h</span>
+                      <span>{priceData?.quotes.USD.volume_24h_change_24h}</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+          </Middle>
+          <Bottom>
             <h1>CryptoInfo</h1>
             <ul>
               <li>
@@ -205,110 +379,7 @@ export default function CryptoInfo() {
                 </ul>
               </li>
             </ul>
-            <h1>CryptoPrice</h1>
-            <ul>
-              <li>
-                <span>id</span>
-                <span>{priceData?.id}</span>
-              </li>
-              <li>
-                <span>rank</span>
-                <span>{priceData?.rank}</span>
-              </li>
-              <li>
-                <span>symbol</span>
-                <span>{priceData?.symbol}</span>
-              </li>
-              <li>
-                <span>beta_value</span>
-                <span>{priceData?.beta_value}</span>
-              </li>
-              <li>
-                <span>circulating_supply</span>
-                <span>{priceData?.circulating_supply}</span>
-              </li>
-              <li>
-                <span>first_data_at</span>
-                <span>{priceData?.first_data_at}</span>
-              </li>
-              <li>
-                <span>last_updated</span>
-                <span>{priceData?.last_updated}</span>
-              </li>
-              <li>
-                <span>max_supply</span>
-                <span>{priceData?.max_supply}</span>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <span>ath_date</span>
-                    <span>{priceData?.quotes.USD.ath_date}</span>
-                  </li>
-                  <li>
-                    <span>ath_price</span>
-                    <span>{priceData?.quotes.USD.ath_price}</span>
-                  </li>
-                  <li>
-                    <span>market_cap</span>
-                    <span>{priceData?.quotes.USD.market_cap}</span>
-                  </li>
-                  <li>
-                    <span>market_cap_change_24h</span>
-                    <span>{priceData?.quotes.USD.market_cap_change_24h}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_15m</span>
-                    <span>{priceData?.quotes.USD.percent_change_15m}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_30m</span>
-                    <span>{priceData?.quotes.USD.percent_change_30m}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_1h</span>
-                    <span>{priceData?.quotes.USD.percent_change_1h}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_6h</span>
-                    <span>{priceData?.quotes.USD.percent_change_6h}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_12h</span>
-                    <span>{priceData?.quotes.USD.percent_change_12h}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_7d</span>
-                    <span>{priceData?.quotes.USD.percent_change_7d}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_30d</span>
-                    <span>{priceData?.quotes.USD.percent_change_30d}</span>
-                  </li>
-                  <li>
-                    <span>percent_change_1y</span>
-                    <span>{priceData?.quotes.USD.percent_change_1y}</span>
-                  </li>
-                  <li>
-                    <span>percent_from_price_ath</span>
-                    <span>{priceData?.quotes.USD.percent_from_price_ath}</span>
-                  </li>
-                  <li>
-                    <span>price</span>
-                    <span>{priceData?.quotes.USD.price}</span>
-                  </li>
-                  <li>
-                    <span>volume_24h</span>
-                    <span>{priceData?.quotes.USD.volume_24h}</span>
-                  </li>
-                  <li>
-                    <span>volume_24h_change_24h</span>
-                    <span>{priceData?.quotes.USD.volume_24h_change_24h}</span>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </Middle>
+          </Bottom>
         </CryptoCt>
       )}
     </Container>
