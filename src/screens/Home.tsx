@@ -14,7 +14,6 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 4em;
   h1 {
     margin-bottom: 1em;
     font-size: 1.2em;

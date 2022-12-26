@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useState } from "react";
+import React from "react";
 import ReactApexChart from "react-apexcharts";
 import { useQuery } from "react-query";
 import styled from "styled-components";
@@ -14,7 +14,6 @@ const Container = styled.div`
 `;
 
 export default function Chart({ coinId }: ChartProps) {
-  const [error, setError] = useState(false);
   const { isLoading, data, isError } = useQuery<ICryptoHistory[], Error>(
     ["ohlcv", coinId],
     () => fetchCoinHistory(coinId)

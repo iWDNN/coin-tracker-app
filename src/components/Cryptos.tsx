@@ -15,41 +15,40 @@ const ResultItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #e7e7e7;
+  background-color: #eee;
   padding: 10px 15px;
   font-size: 0.9em;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.1s ease-in-out;
   &:hover {
-    border-top: 1px solid #c6c4c4;
-    border-bottom: 1px solid #c6c4c4;
+    box-shadow: 0 0 0 1px #dbdbdb inset;
   }
   img {
     width: 20px;
   }
 
   & > div:nth-child(1) {
-    width: 10%;
+    width: 5%;
   }
   & > div:nth-child(2) {
-    width: 15%;
+    width: 5%;
   }
   & > div:nth-child(3) {
-    width: 15%;
+    width: 10%;
     font-size: 0.9em;
     font-weight: 300;
   }
   & > div:nth-child(4) {
-    width: 35%;
+    width: 45%;
   }
   & > div:nth-child(5) {
-    width: 15%;
+    width: 5%;
     color: #858585;
     letter-spacing: 1px;
     font-size: 0.9em;
     font-weight: 500;
   }
   & > div:nth-child(6) {
-    width: 10%;
+    width: 5%;
   }
 `;
 // new | img | symbol | name | type | active
@@ -71,6 +70,7 @@ export default function Cryptos() {
               <div>
                 <img
                   src={`https://coinicons-api.vercel.app/api/icon/${crypto.symbol.toLowerCase()}`}
+                  // src={`https://static.coinpaprika.com/coin/${crypto.id}/logo.png`}
                   alt={crypto.name}
                 />
               </div>

@@ -1,12 +1,52 @@
 import React from "react";
-import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
 import { Search } from "../components";
 import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
+  width: 100%;
+  display: flex;
   flex-grow: 1;
+  background-color: #e7e7e7;
+`;
+const MiniCt = styled.div`
+  display: flex;
+  flex-grow: 1;
+`;
+const Tabs = styled.ul`
+  display: flex;
+  flex-direction: column;
+  h1 {
+    padding: 1em;
+    font-weight: 500;
+  }
+`;
+const Tab = styled.li<{ isActive: boolean }>`
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1.1em;
+  transition: all 0.2s ease-in-out all;
+  background-color: ${(props) => (props.isActive ? "#eee" : "none")};
+  box-shadow: 0 0 0 1px rgba(150, 150, 150, 0.1) inset;
+  span {
+    font-size: 0.8em;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+`;
+const SideView = styled.div`
+  flex-grow: 1;
+  flex-shrink: 1;
 `;
 const Header = styled.div`
   width: 100%;
@@ -14,30 +54,6 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   margin: 5px 0;
-`;
-const MiniCt = styled.div`
-  display: flex;
-`;
-const Tabs = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-const Tab = styled.li<{ isActive: boolean }>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 150px;
-  padding: 10px 15px;
-  margin-bottom: 5px;
-  font-size: 0.9em;
-  font-weight: 500;
-  letter-spacing: 1px;
-  transition: all 0.2s ease-in-out all;
-  background-color: ${(props) => (props.isActive ? "#e7e7e7" : "none")};
-  span {
-    font-size: 0.8em;
-  }
 `;
 
 export default function Results() {
@@ -51,11 +67,9 @@ export default function Results() {
   );
   return (
     <Container>
-      <Header>
-        <Search small />
-      </Header>
       <MiniCt>
         <Tabs>
+          <h1>Search</h1>
           {cryptoTypes.map((type) => (
             <Link key={uuid()} to={`tabs/${type}`}>
               <Tab isActive={type === tabId}>
@@ -72,7 +86,12 @@ export default function Results() {
             </Link>
           ))}
         </Tabs>
-        <Outlet context={searchResult} />
+        <SideView>
+          <Header>
+            <Search small />
+          </Header>
+          <Outlet context={searchResult} />
+        </SideView>
       </MiniCt>
     </Container>
   );

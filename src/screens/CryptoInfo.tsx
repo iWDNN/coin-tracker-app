@@ -11,16 +11,13 @@ type RouteParams = {
   coinId: string;
 };
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
+// const Container = styled.div`
+//   background-color: #eee;
+// `;
 const CryptoCt = styled.div`
-  margin: 2em;
   padding: 1.5em;
   border: 1px solid #e5e5e5;
-  border-radius: 15px;
-  background-color: #eee;
+  background-color: #fff;
   h1 {
     font-weight: 600;
     font-size: 1.4em;
@@ -136,7 +133,7 @@ export default function CryptoInfo() {
   // console.log("infoData:", infoData, "priceData:", priceData);
 
   return (
-    <Container>
+    <>
       {infoLoading && priceLoading ? (
         <Loading />
       ) : (
@@ -382,6 +379,6 @@ export default function CryptoInfo() {
           </Bottom>
         </CryptoCt>
       )}
-    </Container>
+    </>
   );
 }

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Container = styled.div`
   font-size: 0.8em;
   font-weight: 500;
-  background-color: #fff;
+  background-color: #cbcbcb;
 `;
 const List = styled.ul``;
 const Item = styled.li`
@@ -16,7 +16,6 @@ const Item = styled.li`
   color: #1d1d1d;
   font-size: 1.4em;
   border-radius: 5px;
-  background-color: #fff;
   &:hover {
     box-shadow: 0 0 0 1px #111 inset;
   }
