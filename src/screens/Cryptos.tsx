@@ -1,14 +1,22 @@
 import React from "react";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { Signal } from ".";
+import { Signal, Search } from "../components";
 import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
+  display: flex;
   flex-grow: 1;
 `;
-
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+`;
 const ResultList = styled.ul`
+  width: 50%;
   border-radius: 10px;
 `;
 const ResultItem = styled.li`
@@ -51,6 +59,9 @@ const ResultItem = styled.li`
     width: 5%;
   }
 `;
+const InfoScreen = styled.div`
+  width: 50%;
+`;
 // new | img | symbol | name | type | active
 
 export default function Cryptos() {
@@ -59,12 +70,15 @@ export default function Cryptos() {
   const result =
     tabId === "all"
       ? searchResult
-      : searchResult.filter((crypto) => crypto.type === tabId);
+      : searchResult?.filter((crypto) => crypto.type === tabId);
   return (
     <Container>
       <ResultList>
-        {result.map((crypto) => (
-          <Link key={crypto.id} to={`/crypto-info/${crypto.id}`}>
+        <Header>
+          <Search small />
+        </Header>
+        {result?.map((crypto) => (
+          <Link key={crypto.id} to={`${crypto.id}`}>
             <ResultItem>
               <Signal color={crypto.is_new ? "#fce700" : "transparent"} />
               <div>
@@ -88,6 +102,9 @@ export default function Cryptos() {
           </Link>
         ))}
       </ResultList>
+      <InfoScreen>
+        <Outlet />
+      </InfoScreen>
     </Container>
   );
 }

@@ -142,7 +142,6 @@ export default function Search({ small = false }: ISearchProps) {
           small={small}
           onFocus={() => {
             setListTg(true);
-            console.log("onFocus");
           }}
           onChange={onChange}
         />

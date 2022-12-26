@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  Link,
-  Outlet,
-  useLocation,
-  useOutletContext,
-  useParams,
-} from "react-router-dom";
+import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
-import { Search } from "../components";
 import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
@@ -17,15 +10,16 @@ const Container = styled.div`
   flex-grow: 1;
   background-color: #e7e7e7;
 `;
-const MiniCt = styled.div`
+const InnerCt = styled.div`
+  width: 100%;
   display: flex;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 `;
 const Tabs = styled.ul`
   display: flex;
   flex-direction: column;
   h1 {
-    padding: 1em;
+    padding: 0.85em 1em;
     font-weight: 500;
   }
 `;
@@ -44,16 +38,8 @@ const Tab = styled.li<{ isActive: boolean }>`
     letter-spacing: 1px;
   }
 `;
-const SideView = styled.div`
+const SearchScreen = styled.div`
   flex-grow: 1;
-  flex-shrink: 1;
-`;
-const Header = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px 0;
 `;
 
 export default function Results() {
@@ -67,7 +53,7 @@ export default function Results() {
   );
   return (
     <Container>
-      <MiniCt>
+      <InnerCt>
         <Tabs>
           <h1>Search</h1>
           {cryptoTypes.map((type) => (
@@ -86,13 +72,10 @@ export default function Results() {
             </Link>
           ))}
         </Tabs>
-        <SideView>
-          <Header>
-            <Search small />
-          </Header>
+        <SearchScreen>
           <Outlet context={searchResult} />
-        </SideView>
-      </MiniCt>
+        </SearchScreen>
+      </InnerCt>
     </Container>
   );
 }

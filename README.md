@@ -58,7 +58,7 @@
 
 - ~~searchInput 유효성검사하기~~
 - searchlist onBlur와 리스트 클릭의 문제
-- link state 보내기
 - logo 이미지 유틸 함수 서버에러응답처리
+- link state 보내기
 - css 규칙에 맞게 작성
 - 스타일드 컴포넌트 모두 네이밍 다시 작성
