@@ -34,7 +34,7 @@ export default function Chart({ coinId }: ChartProps) {
                 name: "crypto",
                 data: data!.map((price: ICryptoHistory) => {
                   return {
-                    x: new Date(price.time_close),
+                    x: new Date(price.time_close * 1000),
                     y: [price.open, price.high, price.low, price.close],
                   };
                 }),
@@ -46,7 +46,9 @@ export default function Chart({ coinId }: ChartProps) {
                 type: "candlestick",
               },
               title: {
-                text: coinId.toUpperCase(),
+                text: `${new Date(
+                  data![0].time_close * 1000
+                ).toLocaleDateString()} - per minutes`,
                 align: "left",
               },
               annotations: {
@@ -71,17 +73,14 @@ export default function Chart({ coinId }: ChartProps) {
               tooltip: {
                 enabled: true,
               },
-              xaxis: {
-                type: "category",
-                labels: {
-                  formatter: function (val) {
-                    return dayjs(val).format("MMM DD HH:mm");
-                  },
-                },
-              },
               yaxis: {
                 tooltip: {
                   enabled: true,
+                },
+              },
+              xaxis: {
+                labels: {
+                  show: false,
                 },
               },
             }}
