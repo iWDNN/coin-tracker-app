@@ -12,19 +12,25 @@ interface ChartProps {
 const Container = styled.div`
   width: 100%;
 `;
-
+const ChartError = styled.div`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export default function Chart({ coinId }: ChartProps) {
   const { isLoading, data, isError } = useQuery<ICryptoHistory[], Error>(
     ["ohlcv", coinId],
     () => fetchCoinHistory(coinId)
   );
   if (isError) {
-    return <h2>Data was not found</h2>;
+    return <ChartError>Data was not found</ChartError>;
   }
   return (
     <Container>
       {isLoading ? (
-        <h2>Chart Loading...</h2>
+        <ChartError>Chart Loading...</ChartError>
       ) : (
         <>
           <ReactApexChart
@@ -42,7 +48,7 @@ export default function Chart({ coinId }: ChartProps) {
             ]}
             options={{
               chart: {
-                // height: 200,
+                height: 200,
                 type: "candlestick",
               },
               title: {

@@ -7,12 +7,6 @@ import { Loading } from "../components";
 import Chart from "../components/Chart";
 import { ICryptoInfo, ICryptoPrice } from "../types/crypto";
 
-const TempCt = styled.div`
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-`;
-
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -39,20 +33,40 @@ const Title = styled.div`
 
 const OverView = styled.ul`
   width: 100%;
+  padding: 0.9em;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  p {
+    font-weight: 300;
+    line-height: 1.4;
+  }
 `;
 const OverViewItem = styled.li`
+  width: 22%;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  font-size: 0.9em;
   text-align: center;
+  background-color: #e6e6e6;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.01), 0 5px 10px rgba(0, 0, 0, 0.06);
   span {
     display: block;
+    margin-bottom: 5px;
   }
   span:nth-child(1) {
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-weight: 500;
   }
-  span:nth-child(2) {
-    font-size: 0.8em;
-  }
+`;
+const ColorText = styled.span<{ textColor: string }>`
+  color: ${(props) => props.textColor};
+  font-weight: 600;
 `;
 
 export default function CryptoInfo() {
@@ -68,9 +82,7 @@ export default function CryptoInfo() {
   return (
     <Container>
       {infoLoading && priceLoading ? (
-        <TempCt>
-          <Loading />
-        </TempCt>
+        <Loading />
       ) : (
         <>
           <Title>
@@ -84,14 +96,36 @@ export default function CryptoInfo() {
             </OverViewItem>
             <OverViewItem>
               <span>price</span>
-              <span>{priceData?.quotes.USD.price.toFixed(2)}</span>
+              <span>{priceData?.quotes.USD.price.toFixed(2)} USD</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>beta_value</span>
+              <ColorText
+                textColor={
+                  priceData!.quotes.USD.percent_from_price_ath < 0
+                    ? "#F15131"
+                    : "#20BF75"
+                }
+              >
+                {priceData?.beta_value}
+              </ColorText>
             </OverViewItem>
             <OverViewItem>
               <span>ath_price</span>
-              <span>{priceData?.quotes.USD.ath_price.toFixed(2)}</span>
-              <span>{priceData?.quotes.USD.ath_date}</span>
-              <span>{priceData?.quotes.USD.percent_from_price_ath}</span>
+              <span>{priceData?.quotes.USD.ath_price.toFixed(2)} USD</span>
+              <ColorText
+                textColor={
+                  priceData!.quotes.USD.percent_from_price_ath < 0
+                    ? "#F15131"
+                    : "#20BF75"
+                }
+              >
+                {priceData?.quotes.USD.percent_from_price_ath}%
+              </ColorText>
             </OverViewItem>
+          </OverView>
+          <OverView>
+            <p>{infoData?.description}</p>
           </OverView>
         </>
       )}

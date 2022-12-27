@@ -1,8 +1,9 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import { Cryptos } from "./screens";
+import { Cryptos, Ranks } from "./screens";
 import Root from "./Root";
-import { Home, Results, CryptoInfo } from "./screens";
+import { Home, Results } from "./screens";
+import { CryptoInfo } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -30,9 +31,13 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "crypto-info/:coinId",
-        element: <CryptoInfo />,
+        path: "rank",
+        element: <Ranks />,
       },
+      // {
+      //   path: "crypto-info/:coinId",
+      //   element: <CryptoInfo />,
+      // },
     ],
   },
 ]);
