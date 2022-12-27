@@ -62,3 +62,5 @@
 - link state 보내기
 - css 규칙에 맞게 작성
 - 스타일드 컴포넌트 모두 네이밍 다시 작성
+
+https://api.coinpaprika.com/v1/tickers?quotes=USD

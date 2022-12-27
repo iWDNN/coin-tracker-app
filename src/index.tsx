@@ -116,6 +116,8 @@ body {
   line-height: 1;
   background-color: ${(props) => props.theme.bgColor};
   font-family: 'Ubuntu', sans-serif;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 ol,
 ul {

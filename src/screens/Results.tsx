@@ -45,7 +45,7 @@ const SearchScreen = styled.div`
 export default function Results() {
   const cryptoTypes: string[] = ["all", "coin", "token"];
   const { searchId, tabId } = useParams();
-  const allCrypto: ICrypto[] = useOutletContext();
+  const allCrypto = useOutletContext<ICrypto[]>();
   const searchResult: ICrypto[] = allCrypto.filter(
     (crypto) =>
       crypto.name.toLowerCase().slice(0, searchId!.length) ===
