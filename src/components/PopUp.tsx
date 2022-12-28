@@ -13,17 +13,17 @@ const Container = styled.div`
     align-items: center;
   }
   p {
-    width: 300px;
     position: absolute;
     right: 20px;
     bottom: 25px;
+    width: 300px;
     padding: 0.5em;
-    line-height: 1.4;
+    font-size: 0.7em;
     letter-spacing: 0.5px;
+    line-height: 1.4;
     border-radius: 5px;
     background-color: white;
     opacity: 0.5;
-    font-size: 0.7em;
   }
 `;
 

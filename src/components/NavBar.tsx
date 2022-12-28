@@ -12,9 +12,9 @@ const Item = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1.5em;
   color: #1d1d1d;
   font-size: 1.3em;
-  padding: 1.5em;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
   &:hover {
@@ -30,7 +30,7 @@ export default function NavBar() {
             <i className="fa-solid fa-search"></i>
           </Item>
         </Link>
-        <Link to="rank">
+        <Link to="ranks">
           <Item>
             <i className="fa-solid fa-ranking-star"></i>
           </Item>

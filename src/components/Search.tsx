@@ -17,15 +17,15 @@ const SearchCt = styled.form`
 `;
 const SearchBarCt = styled.div<{ small: boolean }>`
   position: relative;
+  height: 100%;
   display: flex;
   align-content: center;
-  height: 100%;
   i {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     left: ${(props) => (props.small ? "0.5em" : "1em")};
     font-size: ${(props) => (props.small ? "0.9em" : "1.1em")};
+    transform: translateY(-50%);
   }
 `;
 
@@ -148,7 +148,7 @@ export default function Search({ small = false }: ISearchProps) {
       </SearchBarCt>
       <SearchList toggle={listTg} onBlur={() => console.log("onBlur")}>
         {searchList.map((crypto) => (
-          <Link key={crypto.id} to={`/crypto-info/${crypto.id}`}>
+          <Link key={crypto.id} to={`/results/${paramSearch}/tabs/all`}>
             <SearchListItem>
               <div>{crypto.is_new ? <Signal color={"#fce700"} /> : null}</div>
               <img

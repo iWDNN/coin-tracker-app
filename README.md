@@ -63,4 +63,9 @@
 - css 규칙에 맞게 작성
 - 스타일드 컴포넌트 모두 네이밍 다시 작성
 
+- 애니메이션
+  - 네비게이션 바 - 이름호버
+  - 로딩
+  -
+
 https://api.coinpaprika.com/v1/tickers?quotes=USD

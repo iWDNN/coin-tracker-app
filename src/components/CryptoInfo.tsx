@@ -10,8 +10,8 @@ import { ICryptoInfo, ICryptoPrice } from "../types/crypto";
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #eee;
   border-left: 1px solid rgba(150, 150, 150, 0.1);
+  background-color: #eee;
 `;
 
 const Title = styled.div`
@@ -33,10 +33,10 @@ const Title = styled.div`
 
 const OverView = styled.ul`
   width: 100%;
-  padding: 0.9em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.9em;
   font-size: 0.9em;
   p {
     font-weight: 300;
@@ -100,7 +100,7 @@ export default function CryptoInfo() {
             </OverViewItem>
             <OverViewItem>
               <span>beta_value</span>
-              <ColorText
+              {/* <ColorText
                 textColor={
                   priceData!.quotes.USD.percent_from_price_ath < 0
                     ? "#F15131"
@@ -108,12 +108,12 @@ export default function CryptoInfo() {
                 }
               >
                 {priceData?.beta_value}
-              </ColorText>
+              </ColorText> */}
             </OverViewItem>
             <OverViewItem>
               <span>ath_price</span>
               <span>{priceData?.quotes.USD.ath_price.toFixed(2)} USD</span>
-              <ColorText
+              {/* <ColorText
                 textColor={
                   priceData!.quotes.USD.percent_from_price_ath < 0
                     ? "#F15131"
@@ -121,7 +121,7 @@ export default function CryptoInfo() {
                 }
               >
                 {priceData?.quotes.USD.percent_from_price_ath}%
-              </ColorText>
+              </ColorText> */}
             </OverViewItem>
           </OverView>
           <OverView>

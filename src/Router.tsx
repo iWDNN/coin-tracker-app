@@ -1,9 +1,8 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import { Cryptos, Ranks } from "./screens";
 import Root from "./Root";
-import { Home, Results } from "./screens";
-import { CryptoInfo } from "./components";
+import { Home, Results, Ranks } from "./screens";
+import { CryptoInfo, Cryptos } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +30,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "rank",
+        path: "ranks",
         element: <Ranks />,
       },
       // {
