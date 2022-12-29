@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
 import { fetchCoinsPrice } from "../api";

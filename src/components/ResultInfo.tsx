@@ -67,14 +67,22 @@ const OverViewItem = styled.li`
 
 export default function ResultInfo() {
   const { coinId } = useParams();
-  const { isLoading: infoLoading, data: infoData } = useQuery<ICryptoInfo>(
-    ["info", coinId],
-    () => fetchCoinInfo(coinId!)
-  );
-  const { isLoading: priceLoading, data: priceData } = useQuery<ICryptoPrice>(
-    ["price", coinId],
-    () => fetchCoinPrice(coinId!)
-  );
+  const {
+    isLoading: infoLoading,
+    data: infoData,
+    isError: infoError,
+  } = useQuery<ICryptoInfo>(["info", coinId], () => fetchCoinInfo(coinId!));
+  const {
+    isLoading: priceLoading,
+    data: priceData,
+    isError: priceError,
+  } = useQuery<ICryptoPrice>(["price", coinId], () => fetchCoinPrice(coinId!));
+
+  if (infoError || priceError) {
+    return <h1>Data was not found</h1>;
+  }
+
+  console.log(coinId);
   return (
     <Container>
       {infoLoading && priceLoading ? (

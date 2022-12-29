@@ -9,14 +9,20 @@ export function fetchCoinsPrice() {
   );
 }
 export function fetchCoinInfo(coinId: string) {
-  return fetch(`${BASE_URL}/coins/${coinId}`).then((response) =>
-    response.json()
-  );
+  return fetch(`${BASE_URL}/coins/${coinId}`).then((response) => {
+    if (!response.ok) {
+      throw new Error("Data was not found");
+    }
+    return response.json();
+  });
 }
 export function fetchCoinPrice(coinId: string) {
-  return fetch(`${BASE_URL}/tickers/${coinId}`).then((response) =>
-    response.json()
-  );
+  return fetch(`${BASE_URL}/tickers/${coinId}`).then((response) => {
+    if (!response.ok) {
+      throw new Error("Data was not found");
+    }
+    return response.json();
+  });
 }
 export function fetchCoinHistory(coinId: string) {
   return fetch(

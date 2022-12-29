@@ -140,9 +140,6 @@ export default function Search({ small = false }: ISearchProps) {
           placeholder="typing the crypto"
           err={errTg}
           small={small}
-          onFocus={() => {
-            setListTg(true);
-          }}
           onChange={onChange}
         />
       </SearchBarCt>

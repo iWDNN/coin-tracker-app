@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ICryptoPrice } from "../types/crypto";

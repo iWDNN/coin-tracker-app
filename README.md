@@ -21,6 +21,7 @@
 - api link
 
   - 코인전체 : https://api.coinpaprika.com/v1/coins
+  - 코인대다수가격 :https://api.coinpaprika.com/v1/tickers?quotes=USD
   - ~~코인아이콘 : https://cryptoicon-api.vercel.app/api/icon/{코인심볼} api server down~~
   - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.symbol.toLowerCase()}.png
   - 코인정보 : https://api.coinpaprika.com/v1/coins/{coinId}
@@ -59,14 +60,19 @@
 - ~~searchInput 유효성검사하기~~
 - searchlist onBlur와 리스트 클릭의 문제
 - logo 이미지 유틸 함수 서버에러응답처리
-- link state 보내기
-- css 규칙에 맞게 작성
+- ~~css 규칙에 맞게 작성~~
 - 스타일드 컴포넌트 모두 네이밍 다시 작성
 - type page 오름차순 내림차순 토글 만들기
+- 에러페이지 작성
+- 반응형
 
 - 애니메이션
-  - 네비게이션 바 - 이름호버
-  - 로딩
-  -
 
-https://api.coinpaprika.com/v1/tickers?quotes=USD
+  - 네비게이션 바 - 이름호버
+  - ~~로딩~~
+
+- 대량 api 데이터 사용
+- 차트 라이브러리
+- 다크모드
+- api 응답 처리 에러페이지
+- 반응형

@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import { Home, Results, Types } from "./screens";
-import { ResultInfo, ResultList, TypeList } from "./components";
+import { Loading, ResultInfo, ResultList, TypeList } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +39,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // {
-      //   path: "crypto-info/:coinId",
-      //   element: <CryptoInfo />,
-      // },
+      {
+        path: "test",
+        element: <Loading />,
+      },
     ],
   },
 ]);

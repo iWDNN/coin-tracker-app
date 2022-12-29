@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { fetchCoins } from "./api";
 import { Loading, NavBar } from "./components";
 import { ICrypto } from "./types/crypto";
-
+import { Helmet } from "react-helmet";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -22,6 +22,9 @@ export default function Root() {
   );
   return (
     <>
+      <Helmet>
+        <title>Crypto Tracker App</title>
+      </Helmet>
       {isLoading ? (
         <Loading />
       ) : (

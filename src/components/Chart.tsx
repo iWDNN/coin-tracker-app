@@ -1,10 +1,10 @@
-import dayjs from "dayjs";
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 import { fetchCoinHistory } from "../api";
 import { ICryptoHistory } from "../types/crypto";
+import Loading from "./Loading";
 
 interface ChartProps {
   coinId: string;
@@ -30,7 +30,9 @@ export default function Chart({ coinId }: ChartProps) {
   return (
     <Container>
       {isLoading ? (
-        <ChartError>Chart Loading...</ChartError>
+        <ChartError>
+          <Loading />
+        </ChartError>
       ) : (
         <>
           <ReactApexChart
