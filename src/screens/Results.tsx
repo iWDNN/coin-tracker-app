@@ -16,6 +16,7 @@ const InnerCt = styled.div`
   /* flex-grow: 1; */
 `;
 const Tabs = styled.ul`
+  width: 150px;
   display: flex;
   flex-direction: column;
   h1 {
@@ -24,7 +25,6 @@ const Tabs = styled.ul`
   }
 `;
 const Tab = styled.li<{ isActive: boolean }>`
-  width: 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +57,7 @@ export default function Results() {
         <Tabs>
           <h1>Search</h1>
           {cryptoTypes.map((type) => (
-            <Link key={uuid()} to={`tabs/${type}`}>
+            <Link key={uuid()} to={`${type}`}>
               <Tab isActive={type === tabId}>
                 <span>{type}</span>
                 <span>

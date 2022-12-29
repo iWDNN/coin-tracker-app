@@ -1,8 +1,8 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
-import { Home, Results, Ranks } from "./screens";
-import { CryptoInfo, Cryptos } from "./components";
+import { Home, Results, Types } from "./screens";
+import { ResultInfo, ResultList, TypeList } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -14,24 +14,30 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "results/:searchId",
+        path: "search/:searchId",
         element: <Results />,
         children: [
           {
-            path: "tabs/:tabId",
-            element: <Cryptos />,
+            path: ":tabId",
+            element: <ResultList />,
             children: [
               {
                 path: ":coinId",
-                element: <CryptoInfo />,
+                element: <ResultInfo />,
               },
             ],
           },
         ],
       },
       {
-        path: "ranks",
-        element: <Ranks />,
+        path: "types",
+        element: <Types />,
+        children: [
+          {
+            path: ":tabId",
+            element: <TypeList />,
+          },
+        ],
       },
       // {
       //   path: "crypto-info/:coinId",

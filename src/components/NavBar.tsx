@@ -30,12 +30,12 @@ export default function NavBar() {
             <i className="fa-solid fa-search"></i>
           </Item>
         </Link>
-        <Link to="ranks">
+        <Link to="types/rank">
           <Item>
-            <i className="fa-solid fa-ranking-star"></i>
+            <i className="fa-solid fa-bars"></i>
           </Item>
         </Link>
-        <Item>
+        {/* <Item>
           <Link to="/">
             <i className="fa-solid fa-bolt"></i>
           </Link>
@@ -44,7 +44,7 @@ export default function NavBar() {
           <Link to="/">
             <i className="fa-solid fa-fire"></i>
           </Link>
-        </Item>
+        </Item> */}
       </List>
     </Container>
   );

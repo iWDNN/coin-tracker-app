@@ -15,11 +15,11 @@ const Header = styled.div`
   align-items: center;
   margin: 5px 0;
 `;
-const ResultList = styled.ul`
-  width: 50%;
+const List = styled.ul`
+  width: 610px;
   border-radius: 10px;
 `;
-const ResultItem = styled.li`
+const ResultItem = styled.li<{ isActive?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +27,8 @@ const ResultItem = styled.li`
   padding: 10px 15px;
   font-size: 0.9em;
   transition: all 0.1s ease-in-out;
+  box-shadow: ${(props) =>
+    props.isActive ? "0 0 0 1px #dbdbdb inset" : "none"};
   &:hover {
     box-shadow: 0 0 0 1px #dbdbdb inset;
   }
@@ -60,12 +62,12 @@ const ResultItem = styled.li`
   }
 `;
 const InfoScreen = styled.div`
-  width: 50%;
+  width: 610px;
 `;
 // new | img | symbol | name | type | active
 
-export default function Cryptos() {
-  const { tabId } = useParams();
+export default function ResultList() {
+  const { tabId, coinId } = useParams();
   const searchResult: ICrypto[] = useOutletContext();
   const result =
     tabId === "all"
@@ -73,13 +75,15 @@ export default function Cryptos() {
       : searchResult?.filter((crypto) => crypto.type === tabId);
   return (
     <Container>
-      <ResultList>
+      <List>
         <Header>
           <Search small />
         </Header>
         {result?.map((crypto) => (
           <Link key={crypto.id} to={`${crypto.id}`}>
-            <ResultItem>
+            <ResultItem
+              isActive={coinId ? (coinId === crypto.id ? true : false) : false}
+            >
               <Signal color={crypto.is_new ? "#fce700" : "transparent"} />
               <div>
                 <img
@@ -101,7 +105,7 @@ export default function Cryptos() {
             </ResultItem>
           </Link>
         ))}
-      </ResultList>
+      </List>
       <InfoScreen>
         <Outlet />
       </InfoScreen>

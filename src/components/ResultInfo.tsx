@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
-import { Loading } from "../components";
+import { Loading, ColorText } from "../components";
 import Chart from "../components/Chart";
 import { ICryptoInfo, ICryptoPrice } from "../types/crypto";
 
@@ -64,12 +64,8 @@ const OverViewItem = styled.li`
     font-weight: 500;
   }
 `;
-const ColorText = styled.span<{ textColor: string }>`
-  color: ${(props) => props.textColor};
-  font-weight: 600;
-`;
 
-export default function CryptoInfo() {
+export default function ResultInfo() {
   const { coinId } = useParams();
   const { isLoading: infoLoading, data: infoData } = useQuery<ICryptoInfo>(
     ["info", coinId],
@@ -100,28 +96,30 @@ export default function CryptoInfo() {
             </OverViewItem>
             <OverViewItem>
               <span>beta_value</span>
-              {/* <ColorText
-                textColor={
-                  priceData!.quotes.USD.percent_from_price_ath < 0
-                    ? "#F15131"
-                    : "#20BF75"
+              <ColorText
+                color={
+                  priceData
+                    ? priceData.quotes.USD.percent_from_price_ath < 0
+                      ? "#F15131"
+                      : "#20BF75"
+                    : "black"
                 }
-              >
-                {priceData?.beta_value}
-              </ColorText> */}
+                text={priceData?.beta_value + "%"}
+              />
             </OverViewItem>
             <OverViewItem>
               <span>ath_price</span>
               <span>{priceData?.quotes.USD.ath_price.toFixed(2)} USD</span>
-              {/* <ColorText
-                textColor={
-                  priceData!.quotes.USD.percent_from_price_ath < 0
-                    ? "#F15131"
-                    : "#20BF75"
+              <ColorText
+                color={
+                  priceData
+                    ? priceData.quotes.USD.percent_from_price_ath < 0
+                      ? "#F15131"
+                      : "#20BF75"
+                    : "black"
                 }
-              >
-                {priceData?.quotes.USD.percent_from_price_ath}%
-              </ColorText> */}
+                text={priceData?.quotes.USD.percent_from_price_ath + "%"}
+              />
             </OverViewItem>
           </OverView>
           <OverView>

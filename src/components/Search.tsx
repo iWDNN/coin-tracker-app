@@ -52,17 +52,13 @@ const SearchList = styled.ul<{ toggle: boolean }>`
   overflow: scroll;
 `;
 
-const SearchListItem = styled.li`
+const SearchListItem = styled.li<{ isActive?: boolean }>`
   width: 100%;
   padding: 0.5em;
   font-size: 0.9em;
   background-color: #fff;
   display: grid;
   grid-template-columns: 5% 5% 80% 10%;
-  &:hover {
-    border: 1px solid black;
-    border-radius: 10px;
-  }
   div:first-child {
     flex-shrink: 1;
     place-self: center;
@@ -85,6 +81,10 @@ const SearchListItem = styled.li`
     letter-spacing: 1px;
     font-size: 0.5em;
     font-weight: 500;
+  }
+  &:hover {
+    border: 1px solid black;
+    border-radius: 10px;
   }
 `;
 export default function Search({ small = false }: ISearchProps) {
@@ -128,7 +128,7 @@ export default function Search({ small = false }: ISearchProps) {
       // 영문자를 제외한 문자가 있으면 true
       setErrTg(true);
     } else {
-      navigate(`/results/${paramSearch}/tabs/all`);
+      navigate(`/search/${paramSearch}/all`);
     }
     setListTg(false);
   };
@@ -146,9 +146,9 @@ export default function Search({ small = false }: ISearchProps) {
           onChange={onChange}
         />
       </SearchBarCt>
-      <SearchList toggle={listTg} onBlur={() => console.log("onBlur")}>
+      <SearchList toggle={listTg}>
         {searchList.map((crypto) => (
-          <Link key={crypto.id} to={`/results/${paramSearch}/tabs/all`}>
+          <Link key={crypto.id} to={`/search/${paramSearch}/all/${crypto.id}`}>
             <SearchListItem>
               <div>{crypto.is_new ? <Signal color={"#fce700"} /> : null}</div>
               <img
