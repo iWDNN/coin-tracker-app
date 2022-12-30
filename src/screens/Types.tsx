@@ -17,7 +17,8 @@ const TypesScreen = styled.div`
   flex-grow: 1;
 `;
 const Tabs = styled.ul`
-  width: 150px;
+  width: 141px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   h1 {
@@ -53,7 +54,7 @@ export default function Types() {
       ) : (
         <>
           <Tabs>
-            <h1>Types</h1>
+            <h1>Top 21</h1>
             {cryptoTypes.map((type) => (
               <Link key={uuid()} to={`${type}`}>
                 <Tab>

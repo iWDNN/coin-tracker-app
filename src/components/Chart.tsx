@@ -22,7 +22,7 @@ const ChartError = styled.div`
 export default function Chart({ coinId }: ChartProps) {
   const { isLoading, data, isError } = useQuery<ICryptoHistory[], Error>(
     ["ohlcv", coinId],
-    () => fetchCoinHistory(coinId)
+    () => fetchCoinHistory(coinId!)
   );
   if (isError) {
     return <ChartError>Data was not found</ChartError>;

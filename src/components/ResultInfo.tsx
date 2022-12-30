@@ -82,7 +82,6 @@ export default function ResultInfo() {
     return <h1>Data was not found</h1>;
   }
 
-  console.log(coinId);
   return (
     <Container>
       {infoLoading && priceLoading ? (
@@ -103,17 +102,14 @@ export default function ResultInfo() {
               <span>{priceData?.quotes.USD.price.toFixed(2)} USD</span>
             </OverViewItem>
             <OverViewItem>
-              <span>beta_value</span>
-              <ColorText
-                color={
-                  priceData
-                    ? priceData.quotes.USD.percent_from_price_ath < 0
-                      ? "#F15131"
-                      : "#20BF75"
-                    : "black"
-                }
-                text={priceData?.beta_value + "%"}
-              />
+              <span>volume_24h</span>
+              <span>
+                $
+                {priceData?.quotes.USD.volume_24h
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </span>
             </OverViewItem>
             <OverViewItem>
               <span>ath_price</span>

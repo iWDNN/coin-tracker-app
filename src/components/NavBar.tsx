@@ -35,16 +35,11 @@ export default function NavBar() {
             <i className="fa-solid fa-bars"></i>
           </Item>
         </Link>
-        {/* <Item>
-          <Link to="/">
-            <i className="fa-solid fa-bolt"></i>
-          </Link>
-        </Item>
-        <Item>
-          <Link to="/">
-            <i className="fa-solid fa-fire"></i>
-          </Link>
-        </Item> */}
+        {/* <Link to="/bookmark">
+          <Item>
+            <i className="fa-solid fa-star"></i>
+          </Item>
+        </Link> */}
       </List>
     </Container>
   );

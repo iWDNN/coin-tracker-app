@@ -3,15 +3,18 @@ import { useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ICryptoPrice } from "../types/crypto";
 import ColorText from "./ColorText";
+import TypeChart from "./TypeChart";
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-grow: 1;
 `;
 const List = styled.ul`
-  max-width: 1080px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: center;
   padding: 10px;
   background-color: #eee;
 `;
@@ -59,6 +62,7 @@ const Item = styled.li`
     font-size: 0.8em;
     font-weight: 500;
     text-align: right;
+    color: #2d2d2d;
     h1 {
       margin-bottom: 8px;
     }
@@ -71,6 +75,10 @@ const Item = styled.li`
         font-size: 0.9em;
         margin-left: 5px;
       }
+    }
+    h2 {
+      margin-top: 5px;
+      font-size: 0.8em;
     }
   }
 `;
@@ -117,10 +125,16 @@ export default function TypeList() {
                 text={"$" + crypto?.quotes.USD.price.toFixed(2)}
               />
               <div>
-                <h2>{crypto?.quotes.USD.percent_change_24h}% /d</h2>
-                <h2>{crypto?.quotes.USD.percent_change_1h}% /h</h2>
+                <h2>{crypto?.quotes.USD.percent_change_24h + "%"}d</h2>
+                <h2>{crypto?.quotes.USD.percent_change_1h + "%"}h</h2>
               </div>
-              {/* <h2>${crypto?.quotes.USD.volume_24h.toFixed(2)} / 24h</h2> */}
+              <h2>
+                $
+                {crypto?.quotes.USD.volume_24h
+                  .toFixed(2)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </h2>
             </div>
           </Item>
         ))}

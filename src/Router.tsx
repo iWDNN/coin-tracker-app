@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
-import { Home, Results, Types } from "./screens";
+import { Home, Results, Types, Bookmark } from "./screens";
 import { Loading, ResultInfo, ResultList, TypeList } from "./components";
 
 const router = createBrowserRouter([
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
             element: <TypeList />,
           },
         ],
+      },
+      {
+        path: "bookmark",
+        element: <Bookmark />,
       },
       {
         path: "test",
