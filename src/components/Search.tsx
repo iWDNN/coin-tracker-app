@@ -10,8 +10,9 @@ interface ISearchProps {
 
 const SearchCt = styled.form`
   position: relative;
-  /* display: flex;
-  align-items: center; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-left: 1em;
   border-radius: 10px;
 `;
@@ -19,6 +20,7 @@ const SearchBarCt = styled.div<{ small: boolean }>`
   position: relative;
   height: 100%;
   display: flex;
+  justify-content: center;
   align-content: center;
   i {
     position: absolute;
@@ -26,6 +28,9 @@ const SearchBarCt = styled.div<{ small: boolean }>`
     left: ${(props) => (props.small ? "0.5em" : "1em")};
     font-size: ${(props) => (props.small ? "0.9em" : "1.1em")};
     transform: translateY(-50%);
+  }
+  @media screen and (max-width: 750px) {
+    width: 100%;
   }
 `;
 
@@ -36,6 +41,10 @@ const SearchBar = styled.input<{ err: boolean; small: boolean }>`
   font-size: ${(props) => (props.small ? "1em" : "1.1em")};
   border-radius: 15px;
   border: none;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+    margin-right: 10px;
+  }
   &:focus {
     outline: ${(props) =>
       props.err ? "2px solid #ff5c5c" : "2px solid #c2c2c2"};
@@ -46,10 +55,14 @@ const SearchBar = styled.input<{ err: boolean; small: boolean }>`
 `;
 const SearchList = styled.ul<{ toggle: boolean }>`
   position: absolute;
-  width: 100%;
+  top: 100%;
+  width: 35%;
   height: ${(props) => (props.toggle ? "174px" : "0%")};
   border-radius: 10px;
   overflow: scroll;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 const SearchListItem = styled.li<{ isActive?: boolean }>`

@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
 import { fetchCoinsPrice } from "../api";
@@ -12,16 +12,20 @@ const Container = styled.div`
   display: flex;
   flex-grow: 1;
   background-color: #e7e7e7;
-`;
-const TypesScreen = styled.div`
-  flex-grow: 1;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Tabs = styled.ul`
   width: 141px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 750px) {
+    flex-direction: row;
+  }
   h1 {
+    flex-shrink: 0;
     padding: 0.85em 1em;
     font-weight: 500;
   }
@@ -40,8 +44,11 @@ const Tab = styled.li<{ isActive?: boolean }>`
     letter-spacing: 1px;
   }
 `;
-
+const TypesScreen = styled.div`
+  flex-grow: 1;
+`;
 export default function Types() {
+  const { tabId } = useParams();
   const cryptoTypes: string[] = ["rank", "price", "volume"];
   const { isLoading, data: allCryptoPrice } = useQuery<ICryptoPrice[]>(
     "allCryptoPrice",
@@ -57,7 +64,7 @@ export default function Types() {
             <h1>Top 21</h1>
             {cryptoTypes.map((type) => (
               <Link key={uuid()} to={`${type}`}>
-                <Tab>
+                <Tab isActive={tabId === type}>
                   <span>{type}</span>
                 </Tab>
               </Link>

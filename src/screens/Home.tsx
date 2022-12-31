@@ -11,15 +11,23 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  @media screen and (max-width: 750px) {
+    height: 100%;
+  }
+
   h1 {
     margin-bottom: 1em;
     font-size: 1.2em;
     font-weight: 500;
     letter-spacing: 1px;
     /* text-transform: uppercase; */
+    @media screen and (max-width: 750px) {
+      display: none;
+    }
   }
 `;
 

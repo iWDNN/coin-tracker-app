@@ -13,11 +13,16 @@ const Container = styled.div`
 const InnerCt = styled.div`
   width: 100%;
   display: flex;
-  /* flex-grow: 1; */
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
 `;
 const Tabs = styled.ul`
   width: 150px;
   display: flex;
+  @media screen and (max-width: 750px) {
+    flex-direction: row;
+  }
   flex-direction: column;
   h1 {
     padding: 0.85em 1em;

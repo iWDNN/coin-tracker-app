@@ -17,6 +17,12 @@ const List = styled.ul`
   align-items: center;
   padding: 10px;
   background-color: #eee;
+  overflow: scroll;
+  @media screen and (max-width: 750px) {
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+  }
 `;
 const Item = styled.li`
   height: 10vh;
@@ -27,6 +33,9 @@ const Item = styled.li`
   border-radius: 7px;
   background-color: #e6e6e6;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.01), 0 5px 10px rgba(0, 0, 0, 0.06);
+  @media screen and (max-width: 750px) {
+    width: 90%;
+  }
   div:nth-child(1) {
     margin-right: 10px;
     font-weight: 500;

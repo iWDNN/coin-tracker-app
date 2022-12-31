@@ -7,6 +7,17 @@ import { ICrypto } from "../types/crypto";
 const Container = styled.div`
   display: flex;
   flex-grow: 1;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
+  /* flex-direction: column; */
+`;
+const List = styled.ul`
+  width: 100%;
+  border-radius: 10px;
+  @media screen and (max-width: 750px) {
+    height: 40vh;
+  }
 `;
 const Header = styled.div`
   width: 100%;
@@ -18,6 +29,9 @@ const Header = styled.div`
 const UlCt = styled.div`
   height: 95vh;
   overflow: scroll;
+  @media screen and (max-width: 750px) {
+    height: 35vh;
+  }
 `;
 const Mark = styled.div`
   i {
@@ -31,12 +45,8 @@ const Mark = styled.div`
   }
 `;
 
-const List = styled.ul`
-  width: 610px;
-  border-radius: 10px;
-  overflow: scroll;
-`;
 const ResultItem = styled.li<{ isActive?: boolean }>`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -81,7 +91,7 @@ const ResultItem = styled.li<{ isActive?: boolean }>`
   }
 `;
 const InfoScreen = styled.div`
-  width: 610px;
+  width: 100%;
 `;
 
 // new | img | symbol | name | type | active
