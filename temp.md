@@ -1,369 +1,76 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { fetchCoinInfo, fetchCoinPrice } from "../api";
-import { Loading, PopUp } from "../components";
-import Chart from "../components/Chart";
-import { ICryptoInfo, ICryptoPrice } from "../types/crypto";
+- Libaries
 
-type RouteParams = {
-coinId: string;
-};
+  - styled-components
+  - react-router-dom # 6.4~
+  - framer-motion
+  - react-hook-form
+    - createBrowserRouter
+    - Link : 특정 조건 없이 클릭해서 보내는 링크
+    - useNavigate : 유저가 로그인하여 리다이렉트해야 할 경우는, 어떤 페이지에 접근햇는데 권한이 없어서 이동시킬 때
+    - useParams : 주소 파라미터 값 가져오는 훅
+    - outlet: 스크린 하나당 자식을 보여줄 경우
+    - useOutletContext : outlet으로 보낸 데이터
+    - url을 통해서 작업을 하는 이유 : 새로고침 했을 경우 유저가 그자리에서 시작될수 있게 만들어 주는 편의성
+  - react-query
+  - recoil
+  - react-uuid
+  - apex-chart
 
-// const Container = styled.div`//   background-color: #eee;
-//`;
-const CryptoCt = styled.div`  padding: 1.5em;
-  border: 1px solid #e5e5e5;
-  background-color: #fff;
-  h1 {
-    font-weight: 600;
-    font-size: 1.4em;
-    padding: 1em 0.5em;
-    margin-top: 1em;
-    background-color: #000000;
-    color: #ff8080;
-  }`;
-const Title = styled.div`  display: flex;
-  img {
-    width: 40px;
-    height: 40px;
-    margin-right: 1em;
-  }
-  div {
-    h3 {
-      margin-bottom: 5px;
-      font-size: 1.1em;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-    h4 {
-      color: rgba(0, 0, 0, 0.6);
-      font-size: 0.9em;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-    }
-  }`;
-const Overview = styled.ul`  display: flex;
-  justify-content: space-between;`;
-const OverviewItem = styled.li`  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0 10px;
-  span:first-child {
-    font-size: 0.7em;
-    font-weight: 600;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  }
-  span:last-child {
-    font-size: 0.8em;
-    font-weight: 400;
-  }`;
-const Top = styled.div`  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.2); */`;
-const Middle = styled.div`  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  ul {
-    margin: 10px;
-    li {
-      display: flex;
-      span {
-        padding: 4px;
-      }
-      span:first-child {
-        background-color: #000;
-        color: #fff;
-      }
-      span:last-child {
-        margin-right: 10px;
-        background-color: #fff;
-        color: #000;
-      }
-    }
-  }`;
-const Bottom = styled.div`  ul {
-    margin: 10px;
-    li {
-      display: flex;
-      span {
-        padding: 4px;
-      }
-      span:first-child {
-        background-color: #000;
-        color: #fff;
-      }
-      span:last-child {
-        margin-right: 10px;
-        background-color: #fff;
-        color: #000;
-      }
-    }
-  }`;
+- api link
 
-export default function CryptoInfo() {
-const { coinId } = useParams<keyof RouteParams>() as RouteParams; // 임시 대처
+  - 코인전체 : https://api.coinpaprika.com/v1/coins
+  - 코인대다수가격 :https://api.coinpaprika.com/v1/tickers?quotes=USD
+  - ~~코인아이콘 : https://cryptoicon-api.vercel.app/api/icon/{코인심볼} api server down~~
+  - 코인아이콘 : https://cryptocurrencyliveprices.com/img/${coin.symbol.toLowerCase()}.png
+  - 코인정보 : https://api.coinpaprika.com/v1/coins/{coinId}
+  - 코인가격 : https://api.coinpaprika.com/v1/tickers/{coinId}
+  - ohlcv임시 : https://ohlcv-api.nomadcoders.workers.dev/?coinId={coinId}
 
-const { isLoading: infoLoading, data: infoData } = useQuery<ICryptoInfo>(
-["info", coinId],
-() => fetchCoinInfo(coinId)
-);
-const { isLoading: priceLoading, data: priceData } = useQuery<ICryptoPrice>(
-["price", coinId],
-() => fetchCoinPrice(coinId)
-);
+- 루트 스크린
 
-// console.log("infoData:", infoData, "priceData:", priceData);
+  - 홈 스크린
 
-return (
-<>
-{infoLoading && priceLoading ? (
-<Loading />
-) : (
-<CryptoCt>
-<Top>
-<Title>
-<img src={infoData?.logo} alt={infoData?.symbol} />
-<div>
-<h3>{infoData?.name}</h3>
-<h4>{infoData?.symbol}</h4>
-</div>
-<PopUp text={infoData?.description} />
-</Title>
-<Overview>
-<OverviewItem>
-<span>beta_value</span>
-<span>{priceData?.beta_value} USD</span>
-</OverviewItem>
-<OverviewItem>
-<span>price</span>
-<span>{priceData?.quotes.USD.price.toFixed(2)} USD</span>
-</OverviewItem>
-<OverviewItem>
-<span>circulating_supply</span>
-<span>{priceData?.circulating_supply}</span>
-</OverviewItem>
-<OverviewItem>
-<span>max_supply</span>
-<span>{priceData?.max_supply}</span>
-</OverviewItem>
-</Overview>
-</Top>
-<Middle>
-<section>
-<h1>CryptoChart</h1>
-<Chart coinId={coinId} />
-</section>
-<section>
-<h1>CryptoPrice</h1>
-<ul>
-<li>
-<span>id</span>
-<span>{priceData?.id}</span>
-</li>
-<li>
-<span>rank</span>
-<span>{priceData?.rank}</span>
-</li>
-<li>
-<span>symbol</span>
-<span>{priceData?.symbol}</span>
-</li>
-<li>
-<span>beta_value</span>
-<span>{priceData?.beta_value}</span>
-</li>
-<li>
-<span>circulating_supply</span>
-<span>{priceData?.circulating_supply}</span>
-</li>
-<li>
-<span>first_data_at</span>
-<span>{priceData?.first_data_at}</span>
-</li>
-<li>
-<span>last_updated</span>
-<span>{priceData?.last_updated}</span>
-</li>
-<li>
-<span>max_supply</span>
-<span>{priceData?.max_supply}</span>
-</li>
-<li>
-<ul>
-<li>
-<span>ath_date</span>
-<span>{priceData?.quotes.USD.ath_date}</span>
-</li>
-<li>
-<span>ath_price</span>
-<span>{priceData?.quotes.USD.ath_price}</span>
-</li>
-<li>
-<span>market_cap</span>
-<span>{priceData?.quotes.USD.market_cap}</span>
-</li>
-<li>
-<span>market_cap_change_24h</span>
-<span>{priceData?.quotes.USD.market_cap_change_24h}</span>
-</li>
-<li>
-<span>percent_change_15m</span>
-<span>{priceData?.quotes.USD.percent_change_15m}</span>
-</li>
-<li>
-<span>percent_change_30m</span>
-<span>{priceData?.quotes.USD.percent_change_30m}</span>
-</li>
-<li>
-<span>percent_change_1h</span>
-<span>{priceData?.quotes.USD.percent_change_1h}</span>
-</li>
-<li>
-<span>percent_change_6h</span>
-<span>{priceData?.quotes.USD.percent_change_6h}</span>
-</li>
-<li>
-<span>percent_change_12h</span>
-<span>{priceData?.quotes.USD.percent_change_12h}</span>
-</li>
-<li>
-<span>percent_change_7d</span>
-<span>{priceData?.quotes.USD.percent_change_7d}</span>
-</li>
-<li>
-<span>percent_change_30d</span>
-<span>{priceData?.quotes.USD.percent_change_30d}</span>
-</li>
-<li>
-<span>percent_change_1y</span>
-<span>{priceData?.quotes.USD.percent_change_1y}</span>
-</li>
-<li>
-<span>percent_from_price_ath</span>
-<span>
-{priceData?.quotes.USD.percent_from_price_ath}
-</span>
-</li>
-<li>
-<span>price</span>
-<span>{priceData?.quotes.USD.price}</span>
-</li>
-<li>
-<span>volume_24h</span>
-<span>{priceData?.quotes.USD.volume_24h}</span>
-</li>
-<li>
-<span>volume_24h_change_24h</span>
-<span>{priceData?.quotes.USD.volume_24h_change_24h}</span>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-</Middle>
-<Bottom>
-<h1>CryptoInfo</h1>
-<ul>
-<li>
-<span>id</span>
-<span>{infoData?.id}</span>
-</li>
-<li>
-<span>rank</span>
-<span>{infoData?.rank}</span>
-</li>
-<li>
-<span>type</span>
-<span>{infoData?.type}</span>
-</li>
-<li>
-<span>name</span>
-<span>{infoData?.name}</span>
-</li>
-<li>
-<span>is_active</span>
-<span>{infoData?.is_active}</span>
-</li>
-<li>
-<span>is_new</span>
-<span>{infoData?.is_new}</span>
-</li>
-<li>
-<span>open_source</span>
-<span>{infoData?.open_source}</span>
-</li>
-<li>
-<span>hardware_wallet</span>
-<span>{infoData?.hardware_wallet}</span>
-</li>
-<li>
-<span>message</span>
-<span>{infoData?.message}</span>
-</li>
-<li>
-<span>org_structure</span>
-<span>{infoData?.org_structure}</span>
-</li>
-<li>
-<span>started_at</span>
-<span>{infoData?.started_at}</span>
-</li>
-<li>
-<span>first_data_at</span>
-<span>{infoData?.first_data_at}</span>
-</li>
-<li>
-<span>last_data_at</span>
-<span>{infoData?.last_data_at}</span>
-</li>
-<li>
-<span>desc</span>
-<span>{infoData?.description}</span>
-</li>
-<li>
-<span>development_status</span>
-<span>{infoData?.development_status}</span>
-</li>
-<li>
-<span>team</span>
-<ul>
-{infoData?.team.map((person) => (
-<li key={person.id}>
-<span>{person.position}</span>
-<span>{person.name}</span>
-</li>
-))}
-</ul>
-</li>
-<li>
-<ul>
-{infoData?.tags.map((tag) => (
-<li key={tag.id}>
-<ul>
-<li>
-<span>coin_counter</span>
-<span>{tag.coin_counter}</span>
-</li>
-<li>
-<span>ico_counter</span>
-<span>{tag.ico_counter}</span>
-</li>
-<li>
-<span>name</span>
-<span>{tag.name}</span>
-</li>
-</ul>
-</li>
-))}
-</ul>
-</li>
-</ul>
-</Bottom>
-</CryptoCt>
-)}
-</>
-);
-}
+    - \*북마크리스트
+    - \*최근검색어리스트
+    - 검색창
+      - 메인창에서 react-query로 데이터 받아오기. (캐시 저장)
+      - 받아온 데이터로. 검색 regExp로 해야할듯 3글자 이상부터 검색..?
+
+  - 검색 결과 스크린
+
+    - Cryptos.tsx
+
+  - 크립토 순위 스크린
+  - 새로운 크립토 스크린
+  - 거래량 많은 크립토 스크린
+  - \*크립토 비교 스크린
+
+  - 북마크 스크린
+
+- pricedata
+
+  - beta_value : 베타(β)는 전체 시장(일반적으로 S&P 500)과 비교하여 보안 또는 포트폴리오 의 변동성 또는 체계적 위험 을 측정한 것입니다. 베타가 1.0보다 높은 주식은 S&P 500보다 변동성이 더 큰 것으로 해석할 수 있습니다.
+  - circulating_supply : 유통량
+  - market_cap : 총시가
+  - ath : ALL TIME HIGH 가장 높았던 가격
+  - hardware-wallet : 하드웨어 지갑(월렛)이란 콜드 월렛이라고도 부르며, 간단히 말해 플래시 드라이브 타입의 기기와 같은 하드웨어 형식의 암호화폐 지갑으로 오프라인으로 암호화폐 자금과 NFT를 보관할 수 있는 지갑입니다. 하드웨어 지갑의 예시로는 렛져(Ledger)와 트레저(Trezor)가 있습니다.
+
+- ~~searchInput 유효성검사하기~~
+- searchlist onBlur와 리스트 클릭의 문제
+- logo 이미지 유틸 함수 서버에러응답처리
+- ~~css 규칙에 맞게 작성~~
+- 스타일드 컴포넌트 모두 네이밍 다시 작성
+- type page 오름차순 내림차순 토글 만들기
+- 에러페이지 작성
+- 반응형 2022/12
+
+- 애니메이션
+
+  - 네비게이션 바 - 이름호버
+  - ~~로딩~~
+
+- 대량 api 데이터 사용
+- 차트 라이브러리
+- 다크모드
+- api 응답 처리 에러페이지
+- 반응형
