@@ -42,5 +42,8 @@
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/88272606/210168583-3efd7ea2-b62b-44e8-83b1-fdb3ba8f93d4.gif" height="500" />
+</p>
+<p align="center">
   <img src="https://user-images.githubusercontent.com/88272606/210168856-d0c3bb03-3894-4031-9c1c-22ddbf842d83.gif"width="300" height="500" />
+  <img src="https://user-images.githubusercontent.com/88272606/210169180-dfb62762-7dc0-49d0-bd7c-e66ee4dcf2d8.mov" width="300" height="500"/>
 </p>
