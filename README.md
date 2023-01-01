@@ -39,9 +39,10 @@
     - 고 해상도인 맥으로 작업을 진행한 후 윈도우에서 FHD모니터로 화면을 보았을 때 화면의 선명도와 색감의 차이가 크게 난다는 것을 프로젝트 마무리 할쯤에 알게되어 다양한 환경에서 테스트하면서 작업해야 한다는 것을 깨닫게 되었습니다.
 
 - 스크린샷
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/88272606/210168583-3efd7ea2-b62b-44e8-83b1-fdb3ba8f93d4.gif" />
 </p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/88272606/210168583-3efd7ea2-b62b-44e8-83b1-fdb3ba8f93d4.gif" />
+  <img src="https://user-images.githubusercontent.com/88272606/210168856-d0c3bb03-3894-4031-9c1c-22ddbf842d83.gif" />
 </p>
