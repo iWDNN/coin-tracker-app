@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import { fetchCoins } from "./api";
 import { Loading, NavBar } from "./components";
 import { ICrypto } from "./types/crypto";
 import { Helmet } from "react-helmet";
+import { BOOK_MARK_ID } from "./data";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -20,6 +21,10 @@ export default function Root() {
     "allcoins",
     fetchCoins
   );
+  useEffect(() => {
+    if (!localStorage.getItem(BOOK_MARK_ID))
+      localStorage.setItem(BOOK_MARK_ID, JSON.stringify([]));
+  }, []);
   return (
     <>
       <Helmet>

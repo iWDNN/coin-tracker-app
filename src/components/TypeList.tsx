@@ -3,7 +3,6 @@ import { useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ICryptoPrice } from "../types/crypto";
 import ColorText from "./ColorText";
-import TypeChart from "./TypeChart";
 
 const Container = styled.div`
   width: 100%;
@@ -24,7 +23,7 @@ const List = styled.ul`
     height: 95vh;
   }
 `;
-const Item = styled.li`
+const Item = styled.div`
   height: 10vh;
   display: grid;
   grid-template-columns: 1fr 2fr 5fr 5fr;

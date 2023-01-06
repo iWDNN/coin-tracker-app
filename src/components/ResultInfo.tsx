@@ -5,7 +5,9 @@ import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 import { Loading, ColorText } from "../components";
 import Chart from "../components/Chart";
+import { BOOK_MARK_ID } from "../data";
 import { ICryptoInfo, ICryptoPrice } from "../types/crypto";
+import { addNumberComma } from "../utils";
 
 const Container = styled.div`
   width: 100%;
@@ -14,6 +16,20 @@ const Container = styled.div`
   background-color: #eee;
 `;
 
+const Mark = styled.div`
+  margin-right: 7px;
+  cursor: pointer;
+  i {
+    color: rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    i {
+      color: #edd501;
+      text-shadow: 0 0 0 2px #121212 inset;
+    }
+  }
+`;
 const Title = styled.div`
   display: flex;
   padding: 0.9em;
@@ -78,6 +94,15 @@ export default function ResultInfo() {
     isError: priceError,
   } = useQuery<ICryptoPrice>(["price", coinId], () => fetchCoinPrice(coinId!));
 
+  const onClickBookMark = (priceData: ICryptoPrice) => {
+    console.log("onClickBookMark start");
+    const prevLSData = JSON.parse(localStorage.getItem(BOOK_MARK_ID) as any);
+    localStorage.setItem(
+      BOOK_MARK_ID,
+      JSON.stringify([...prevLSData, priceData])
+    );
+  };
+
   if (infoError || priceError) {
     return <h1>Data was not found</h1>;
   }
@@ -89,6 +114,9 @@ export default function ResultInfo() {
       ) : (
         <>
           <Title>
+            <Mark onClick={() => onClickBookMark(priceData!)}>
+              <i className="fa-solid fa-star"></i>
+            </Mark>
             <h1>{infoData?.symbol} / USD</h1>
           </Title>
           <Chart coinId={coinId!} />
@@ -103,13 +131,7 @@ export default function ResultInfo() {
             </OverViewItem>
             <OverViewItem>
               <span>volume_24h</span>
-              <span>
-                $
-                {priceData?.quotes.USD.volume_24h
-                  .toFixed(2)
-                  .toString()
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              </span>
+              <span>${addNumberComma(priceData!.quotes.USD.volume_24h)}</span>
             </OverViewItem>
             <OverViewItem>
               <span>ath_price</span>

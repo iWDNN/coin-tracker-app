@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Outlet, useOutletContext, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Signal, Search } from "../components";
+import { BOOK_MARK_ID } from "../data";
 import { ICrypto } from "../types/crypto";
 
 const Container = styled.div`
@@ -33,17 +34,6 @@ const UlCt = styled.div`
     height: 35vh;
   }
 `;
-const Mark = styled.div`
-  i {
-    color: #e7e7e7;
-    transition: all 0.2s ease-in-out;
-  }
-  &:hover {
-    i {
-      color: #eded15;
-    }
-  }
-`;
 
 const ResultItem = styled.li<{ isActive?: boolean }>`
   width: 100%;
@@ -66,27 +56,24 @@ const ResultItem = styled.li<{ isActive?: boolean }>`
     width: 3%;
   }
   & > div:nth-child(2) {
-    width: 3%;
+    width: 8%;
   }
   & > div:nth-child(3) {
-    width: 5%;
-  }
-  & > div:nth-child(4) {
     width: 10%;
     font-size: 0.9em;
     font-weight: 300;
   }
-  & > div:nth-child(5) {
+  & > div:nth-child(4) {
     width: 44%;
   }
-  & > div:nth-child(6) {
+  & > div:nth-child(5) {
     width: 5%;
     color: #858585;
     letter-spacing: 1px;
     font-size: 0.9em;
     font-weight: 500;
   }
-  & > div:nth-child(7) {
+  & > div:nth-child(6) {
     width: 5%;
   }
 `;
@@ -103,7 +90,6 @@ export default function ResultList() {
     tabId === "all"
       ? searchResult
       : searchResult?.filter((crypto) => crypto.type === tabId);
-  const markOnClick = () => {};
   return (
     <Container>
       <List>
@@ -118,9 +104,6 @@ export default function ResultList() {
                   coinId ? (coinId === crypto.id ? true : false) : false
                 }
               >
-                <Mark onClick={markOnClick}>
-                  <i className="fa-solid fa-star" />
-                </Mark>
                 <Signal color={crypto.is_new ? "#fce700" : "transparent"} />
                 <div>
                   <img
