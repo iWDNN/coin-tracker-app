@@ -80,12 +80,38 @@ const Item = styled.li`
       font-weight: 500;
     }
   }
+  div:nth-child(7) {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      padding: 3px 5px;
+      color: white;
+      text-align: center;
+      border-radius: 5px;
+      background-color: #919191;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        color: black;
+        background-color: #eee;
+      }
+    }
+  }
 `;
 export default function Bookmark() {
   const [data, setData] = useState<ICryptoPrice[]>([]);
   const onClickRank = () => {
     setData((prev) => prev.sort((a, b) => a.rank - b.rank));
     console.log(data);
+  };
+  const onClickDelete = (id: string) => {
+    setData((prev) => prev.filter((crypto) => crypto.id !== id));
+    localStorage.setItem(
+      BOOK_MARK_ID,
+      JSON.stringify(data.filter((crypto) => crypto.id !== id))
+    );
   };
   useEffect(() => {
     const lSData: ICryptoPrice[] = JSON.parse(
@@ -111,6 +137,7 @@ export default function Bookmark() {
             <span>change_1y</span>
           </div>
           <div>vol_24h</div>
+          <div></div>
         </Item>
         {data.map((crypto) => (
           <Item key={crypto.id}>
@@ -179,6 +206,9 @@ export default function Bookmark() {
             <div>
               <span>$ </span>
               {addNumberComma(crypto.quotes.USD.volume_24h)}
+            </div>
+            <div>
+              <span onClick={() => onClickDelete(crypto.id)}>del</span>
             </div>
           </Item>
         ))}
