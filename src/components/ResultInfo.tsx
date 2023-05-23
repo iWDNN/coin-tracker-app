@@ -120,34 +120,34 @@ export default function ResultInfo() {
             <h1>{infoData?.symbol} / USD</h1>
           </Title>
           <Chart coinId={coinId!} />
-          {priceData && (
-            <OverView>
-              <OverViewItem>
-                <span>rank</span>
-                <span>{priceData.rank}</span>
-              </OverViewItem>
-              <OverViewItem>
-                <span>price</span>
-                <span>{priceData.quotes.USD.price.toFixed(2)} USD</span>
-              </OverViewItem>
-              <OverViewItem>
-                <span>volume_24h</span>
-                <span>${addNumberComma(priceData.quotes.USD.volume_24h)}</span>
-              </OverViewItem>
-              <OverViewItem>
-                <span>ath_price</span>
-                <span>{priceData.quotes.USD.ath_price.toFixed(2)} USD</span>
-                <ColorText
-                  color={
-                    priceData.quotes.USD.percent_from_price_ath < 0
+          <OverView>
+            <OverViewItem>
+              <span>rank</span>
+              <span>{priceData?.rank}</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>price</span>
+              <span>{priceData?.quotes.USD.price.toFixed(2)} USD</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>volume_24h</span>
+              <span>${addNumberComma(priceData!.quotes.USD.volume_24h)}</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>ath_price</span>
+              <span>{priceData?.quotes.USD.ath_price.toFixed(2)} USD</span>
+              <ColorText
+                color={
+                  priceData
+                    ? priceData.quotes.USD.percent_from_price_ath < 0
                       ? "#F15131"
                       : "#20BF75"
-                  }
-                  text={priceData.quotes.USD.percent_from_price_ath + "%"}
-                />
-              </OverViewItem>
-            </OverView>
-          )}
+                    : "black"
+                }
+                text={priceData?.quotes.USD.percent_from_price_ath + "%"}
+              />
+            </OverViewItem>
+          </OverView>
           <OverView>
             <p>{infoData?.description}</p>
           </OverView>

@@ -153,15 +153,15 @@ const root = ReactDOM.createRoot(
 
 root.render(
   // <React.StrictMode>
-  // <RecoilRoot>
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={true} />
-    </ThemeProvider>
-  </QueryClientProvider>
-  // </RecoilRoot>
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </RecoilRoot>
   // </React.StrictMode>
 );
 
